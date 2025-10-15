@@ -7,6 +7,7 @@ namespace app\Core;
 class Application {
     public static Application $app;
     public static $ROOT_DIR;
+    public Database $db;
 
     public function __construct(
         public Router $router,
@@ -15,6 +16,13 @@ class Application {
     {
        self::$app = $this;
        self::$ROOT_DIR = $rootPath;
+
+       $this->db = new Database([
+        'host' => $_ENV['DB_HOST'],
+        'dbname' => $_ENV['DB_NAME'],
+        'user' => $_ENV['DB_USER'],
+        'pass' => $_ENV['DB_PASS']
+       ]);
     }
 
     public function run() {
