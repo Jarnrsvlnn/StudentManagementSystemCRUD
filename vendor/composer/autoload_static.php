@@ -7,21 +7,31 @@ namespace Composer\Autoload;
 class ComposerStaticInit9ed426877703095d8900151b4ab6feeb
 {
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'A' => 
         array (
-            'SevilA7\\StudentManagementSystem\\' => 32,
+            'App\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'SevilA7\\StudentManagementSystem\\' => 
+        'App\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'app\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Controllers/AuthController.php',
+        'app\\Controllers\\StudentController' => __DIR__ . '/../..' . '/app/Controllers/StudentController.php',
+        'app\\Core\\Application' => __DIR__ . '/../..' . '/app/Core/Application.php',
+        'app\\Core\\Controller' => __DIR__ . '/../..' . '/app/Core/Controller.php',
+        'app\\Core\\Request' => __DIR__ . '/../..' . '/app/Core/Request.php',
+        'app\\Core\\Response' => __DIR__ . '/../..' . '/app/Core/Response.php',
+        'app\\Core\\Router' => __DIR__ . '/../..' . '/app/Core/Router.php',
+        'app\\Helpers\\Format' => __DIR__ . '/../..' . '/app/Helpers/Format.php',
+        'app\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
+        'app\\Services\\StudentService' => __DIR__ . '/../..' . '/app/Services/StudentService.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

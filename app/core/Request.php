@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Core;
+namespace app\Core;
 
-use App\helpers\Format;
+use app\Helpers\Format;
 
 class Request {
     public function getPath() {
@@ -12,6 +12,6 @@ class Request {
     }
 
     public function getMethod() {
-        return $_SERVER['REQUEST_METHOD'];
+        return strtolower($_SERVER['REQUEST_METHOD']);
     }
 }

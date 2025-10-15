@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core;
+namespace app\Core;
 
 class Router {
     protected array $routes = [];
@@ -24,10 +24,11 @@ class Router {
     public function resolve() {
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
-        $callback = $this->routes[$method][$method] ?? '/';
+        $callback = $this->routes[$method][$path] ?? false;
 
         if (! $callback) {
             $this->response->setStatusCode(404);
+            echo '404 Server Not Found';
         }
 
         if (is_string($callback)) {
@@ -47,18 +48,18 @@ class Router {
     public function renderView(string $view) {
         $layoutContent = $this->renderLayout();
         $viewContent = $this->renderOnlyView($view);
-        return str_replace('{{content}}', $viewContent, $layoutContent);
+        return str_replace('{{content}}', $viewContent, $layoutContent); 
     }
 
-    public function renderLayout() {
+    public function renderLayout(): string {
         ob_start();
-        include Application::$ROOT_DIR . "/views/layouts/main.php";
+        include Application::$ROOT_DIR . "/app/Views/layouts/main.php";
         return ob_get_clean();
     }
 
-    public function renderOnlyView($view) {
+    public function renderOnlyView($view): string {
         ob_start();
-        include Application::$ROOT_DIR . "/views/$view.php";
+        include Application::$ROOT_DIR . "/app/Views/$view.php";
         return ob_get_clean();
     }
 }

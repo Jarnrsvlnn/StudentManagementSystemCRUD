@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controllers;
+namespace app\Controllers;
 
-use App\Core\Controller;
+use app\Core\Controller;
+use app\Services\StudentService;
+use app\Models\Student;
 
 class StudentController extends Controller{
     
@@ -16,9 +18,9 @@ class StudentController extends Controller{
         $this->studentService = new StudentService($db, $studentModel);
     }
 
-    public function index() {
-
+    public function index() 
+    {
         $students = $this->studentService->getAllStudents();
-        return $this->render($);
+        return $this->render($students);
     }
 }

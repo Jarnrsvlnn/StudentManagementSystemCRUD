@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core;
+namespace app\Core;
 
 class Response {
     public function setStatusCode(int $code): void {

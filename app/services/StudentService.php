@@ -2,13 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace app\Services;
 
-use App\Models\Student;
+use app\Models\Student;
 
 class StudentService {
     public function __construct($db, private Student $student)
     {
         
+    }
+
+    public function getAllStudents() 
+    {
+         
     }
 }

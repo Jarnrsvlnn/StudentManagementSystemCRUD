@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\helpers;
+namespace app\Helpers;
 
 class Format {
 
