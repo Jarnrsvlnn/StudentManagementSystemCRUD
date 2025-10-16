@@ -16,7 +16,8 @@ class Student {
         $this->db = Application::$app->db->pdo;
     }
 
-    public function selectAll() {
-        
+    public function all() {
+        $statement = $this->db->query('SELECT * FROM students');
+        return $statement->fetchAll();
     }
 }

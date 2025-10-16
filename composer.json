@@ -11,5 +11,7 @@
             "email": "173128640+Jarnrsvlnn@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }

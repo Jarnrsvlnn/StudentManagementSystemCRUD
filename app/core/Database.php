@@ -21,7 +21,7 @@ class Database {
                 PDO::ATTR_EMULATE_PREPARES => false
             ]);
         } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), $e->getCode());
+            throw new PDOException($e->getMessage());
         }
     }
 }

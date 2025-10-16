@@ -45,9 +45,9 @@ class Router {
         return call_user_func($callback);
     }
 
-    public function renderView(string $view) {
+    public function renderView(string $view, array $params = []) {
         $layoutContent = $this->renderLayout();
-        $viewContent = $this->renderOnlyView($view);
+        $viewContent = $this->renderOnlyView($view, $params);
         return str_replace('{{content}}', $viewContent, $layoutContent); 
     }
 
@@ -57,7 +57,9 @@ class Router {
         return ob_get_clean();
     }
 
-    public function renderOnlyView($view): string {
+    public function renderOnlyView($view, $params): string {
+        extract($params);
+        
         ob_start();
         include Application::$ROOT_DIR . "/app/Views/$view.php";
         return ob_get_clean();

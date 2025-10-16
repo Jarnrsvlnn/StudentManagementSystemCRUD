@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace app\Core;
 
+use Dotenv\Dotenv;
+
 class Application {
     public static Application $app;
     public static $ROOT_DIR;
@@ -16,6 +18,9 @@ class Application {
     {
        self::$app = $this;
        self::$ROOT_DIR = $rootPath;
+
+       $dotenv = Dotenv::createImmutable($rootPath);
+       $dotenv->load();
 
        $this->db = new Database([
         'host' => $_ENV['DB_HOST'],
