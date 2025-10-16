@@ -19,4 +19,12 @@ class StudentController extends Controller {
 
         return $this->render('students', ['students' => $students]);
     }
+
+    public function createForm() {
+        return $this->render('register');
+    }
+
+    public function create() {
+
+    }
 }

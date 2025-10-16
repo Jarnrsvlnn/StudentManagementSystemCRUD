@@ -20,4 +20,19 @@ class Student {
         $statement = $this->db->query('SELECT * FROM students');
         return $statement->fetchAll();
     }
+
+    public function add() {
+        $statement = $this->db->prepare("INSERT INTO students (student_id, full_name, email, gender, address, grade_level) VALUES 
+        (:student_id, :full_name, :email, :gender, :address, :grade_level)
+        "); 
+
+        // $statement->execute([
+        //     ':student_id' => ,
+        //     ':full_name' => ,
+        //     ':email' => ,
+        //     ':gender' => ,
+        //     ':address' => ,
+        //     ':grade_level' =>
+        // ]);
+    }
 }

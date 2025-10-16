@@ -22,4 +22,7 @@ class StudentService {
         return $this->student->all();
     }
     
+    public function createStudent() {
+        
+    }
 }
