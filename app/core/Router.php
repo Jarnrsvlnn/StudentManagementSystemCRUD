@@ -29,6 +29,7 @@ class Router {
         if (! $callback) {
             $this->response->setStatusCode(404);
             echo '404 Server Not Found';
+            return;
         }
 
         if (is_string($callback)) {
@@ -36,10 +37,10 @@ class Router {
         }
 
         if (is_array($callback)) {
-            $instance = new ($callback[0])();
-            $callback[0] = $instance;
+            $controller = new ($callback[0])();
+            $callback[0] = $controller;
 
-            return call_user_func($callback);
+            return call_user_func($callback, $this->request);
         }
 
         return call_user_func($callback);

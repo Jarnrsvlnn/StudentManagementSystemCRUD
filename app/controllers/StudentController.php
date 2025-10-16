@@ -6,6 +6,7 @@ namespace app\Controllers;
 
 use app\Core\Application;
 use app\Core\Controller;
+use app\Core\Request;
 use app\Models\Student;
 use app\Services\StudentService;
 
@@ -24,7 +25,13 @@ class StudentController extends Controller {
         return $this->render('register');
     }
 
-    public function create() {
+    public function create(Request $request) {
+        $studentData = $request->getData();
 
+        echo '<pre>';
+        var_dump($studentData);
+        echo '</pre>';
+
+        return 'Send to the model';
     }
 }
