@@ -10,19 +10,34 @@ use PDO;
 class StudentService {
 
     public function __construct(
-        PDO $db, 
+        private PDO $db,
         private Student $student
-        )
-    {
-        
-    }
+    )
+    {}
 
-    public function getAllStudents() 
+    public function getAllStudents()
     {
         return $this->student->all();
     }
     
-    public function createStudent() {
-        
+    public function createStudent(array $studentData): void
+    {
+
+        $studentID = $studentData['student-id'];
+        $fullName = $studentData['full-name'];
+        $email = $studentData['email'];
+        $gender = $studentData['gender'];
+        $address = $studentData['address'];
+        $gradeLevel = $studentData['grade-level'];
+
+        if ($this->student->findByStudentID($studentID)) {
+            throw new \Exception('Student with that ID already exists!');
+        }
+
+        if ($this->student->findByStudentName($fullName)) {
+            throw new \Exception('Student with that name already exists!');
+        }
+
+        $this->student->add($studentID, $fullName, $email, $gender, $address, $gradeLevel);
     }
 }

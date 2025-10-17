@@ -9,15 +9,22 @@ use app\Core\Controller;
 use app\Core\Request;
 use app\Models\Student;
 use app\Services\StudentService;
+use PDO;
 
 class StudentController extends Controller {
 
+    private PDO $pdo;
+    private StudentService $studentService;
+
+    public function __construct()
+    {
+        $this->pdo = Application::$app->db->pdo;
+        $this->studentService = new StudentService($this->pdo, new Student);
+    }
+
     public function index() 
     {
-        $db = Application::$app->db->pdo;
-        $studentService = new StudentService($db, new Student);
-        $students = $studentService->getAllStudents();
-
+        $students = $this->studentService->getAllStudents();
         return $this->render('students', ['students' => $students]);
     }
 
@@ -27,11 +34,7 @@ class StudentController extends Controller {
 
     public function create(Request $request) {
         $studentData = $request->getData();
-
-        echo '<pre>';
-        var_dump($studentData);
-        echo '</pre>';
-
-        return 'Send to the model';
+        $this->studentService->createStudent($studentData);
+        return $this->render('register');
     }
 }
