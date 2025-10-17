@@ -17,8 +17,12 @@ $students = new StudentService($app->db->pdo, new Student);
 
 $app->router->get('/', 'dashboard');
 $app->router->get('/students', [StudentController::class, 'index']);
+
 $app->router->get('/students/create', [StudentController::class, 'createForm']);
 $app->router->post('/students/create', [StudentController::class, 'create']);
 
+$app->router->get('/students/delete', [StudentController::class, 'deleteForm']);
+$app->router->post('/students/delete', [StudentController::class, 'delete']);
+
 $app->run();
-    
+

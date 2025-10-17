@@ -47,4 +47,9 @@ class Student {
         $statement->execute([':fullName' => $fullName]);
         return $statement->fetch();
     }
+
+    public function deleteStudent(string $studentID) {
+        $statement = $this->pdo->prepare("DELETE FROM students WHERE student_id = :studentID");
+        $statement->execute([':studentID' => $studentID]);
+    }
 }

@@ -37,4 +37,16 @@ class StudentController extends Controller {
         $this->studentService->createStudent($studentData);
         return $this->render('register');
     }
+
+    public function deleteForm() {
+        $students = $this->studentService->getAllStudents();
+        return $this->render('delete', ['students' => $students]);
+    }
+
+    public function delete(Request $request) {
+        $studentData = $request->getData();
+
+        $this->studentService->deleteStudent($studentData);
+        return $this->render('delete');
+    }
 }

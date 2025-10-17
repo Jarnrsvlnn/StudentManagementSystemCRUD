@@ -22,7 +22,6 @@ class StudentService {
     
     public function createStudent(array $studentData): void
     {
-
         $studentID = $studentData['student-id'];
         $fullName = $studentData['full-name'];
         $email = $studentData['email'];
@@ -39,5 +38,16 @@ class StudentService {
         }
 
         $this->student->add($studentID, $fullName, $email, $gender, $address, $gradeLevel);
+    }
+
+    public function deleteStudent(array $studentData): void
+    {
+        $studentID = $studentData['student-id'];
+
+        if (!$this->student->findByStudentID($studentID)) {
+            throw new \Exception('Student not found!');
+        }
+        
+        $this->student->deleteStudent($studentID);
     }
 }
