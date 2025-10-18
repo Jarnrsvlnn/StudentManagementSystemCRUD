@@ -21,15 +21,16 @@ class Student {
         return $statement->fetchAll();
     }
 
-    public function add(string $studentID, string $fullName, string $email, string $gender, string $address, string $gradeLevel) {
-        $statement = $this->pdo->prepare("INSERT INTO students (student_id, full_name, email, gender, address, grade_level) VALUES 
-        (:student_id, :full_name, :email, :gender, :address, :grade_level)
+    public function add(string $studentID, string $fullName, string $email, string $section, string $gender, string $address, string $gradeLevel) {
+        $statement = $this->pdo->prepare("INSERT INTO students (student_id, full_name, email, section, gender, address, grade_level) VALUES 
+        (:student_id, :full_name, :email, :section, :gender, :address, :grade_level)
         "); 
 
         $statement->execute([
             ':student_id' => $studentID,
             ':full_name' => $fullName,
             ':email' => $email,
+            ':section' => $section,
             ':gender' => $gender,
             ':address' => $address,
             ':grade_level' => $gradeLevel
@@ -53,18 +54,21 @@ class Student {
         $statement->execute([':studentID' => $studentID]);
     }
 
-    public function update(string $studentID, string $fullName, string $email, string $gender, string $address, string $gradeLevel) {
+    public function update(string $studentID, string $fullName, string $email, string $section, string $gender, string $address, string $gradeLevel) {
         $statement = $this->pdo->prepare("UPDATE students SET 
                                             full_name = :fullName,
                                             email = :email,
+                                            section = :section,
                                             address = :address,
                                             gender = :gender,
                                             grade_level = :gradeLevel
                                             WHERE student_id = :studentID
         ");
+        
         $statement->execute([
             ':fullName' => $fullName,
             ':email' => $email,
+            ':section' => $section,
             ':address' => $address,
             ':gender' => $gender,
             ':gradeLevel' => $gradeLevel,

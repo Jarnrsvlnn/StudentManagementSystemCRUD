@@ -7,13 +7,21 @@
     <label class="form-label">Full Name</label>
     <input type="text" class="form-control" name="full-name" required>
   </div>
+  <div class="col-12">
+    <label class="form-label">Address</label>
+    <input type="text" class="form-control" name="address" placeholder="1234 Main St" required>
+  </div>
   <div class="col-md-6">
     <label class="form-label">Email</label>
     <input type="email" class="form-control" name="email" placeholder="john.doe@example.com" required>
   </div>
   <div class="col-md-6">
-    <label class="form-label">Address</label>
-    <input type="text" class="form-control" name="address" placeholder="1234 Main St" required>
+    <label class="form-label">Section</label>
+    <select class="form-select" name="section" required>
+      <option selected>Select Section...</option>
+      <option value="1">Section 1</option>
+      <option value="2">Section 2</option>
+    </select>
   </div>
   <div class="col-md-6">
     <label class="form-label">Gender</label>
