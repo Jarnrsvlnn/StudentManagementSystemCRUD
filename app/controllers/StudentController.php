@@ -44,9 +44,20 @@ class StudentController extends Controller {
     }
 
     public function delete(Request $request) {
+        
         $studentData = $request->getData();
-
         $this->studentService->deleteStudent($studentData);
         return $this->render('delete');
+    }
+
+    public function updateForm() {
+        $students = $this->studentService->getAllStudents();
+        return $this->render('update', ['students' => $students]);
+    }
+
+    public function update(Request $request) {
+        $studentData = $request->getData();
+        $this->studentService->updateStudent($studentData);
+        return $this->render('update', ['students' => $this->studentService->getAllStudents()]);
     }
 }

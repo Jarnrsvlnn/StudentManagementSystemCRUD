@@ -21,7 +21,7 @@ class Student {
         return $statement->fetchAll();
     }
 
-    public function add($studentID, $fullName, $email, $gender, $address, $gradeLevel) {
+    public function add(string $studentID, string $fullName, string $email, string $gender, string $address, string $gradeLevel) {
         $statement = $this->pdo->prepare("INSERT INTO students (student_id, full_name, email, gender, address, grade_level) VALUES 
         (:student_id, :full_name, :email, :gender, :address, :grade_level)
         "); 
@@ -36,20 +36,39 @@ class Student {
         ]);
     }
 
-    public function findByStudentID($studentID) {
+    public function findByStudentID(string $studentID) {
         $statement = $this->pdo->prepare("SELECT * FROM students WHERE student_id = :studentID");
         $statement->execute([':studentID' => $studentID]);
         return $statement->fetch();
     }
 
-    public function findByStudentName($fullName) {
+    public function findByStudentName(string $fullName) {
         $statement = $this->pdo->prepare("SELECT * FROM students WHERE full_name = :fullName");
         $statement->execute([':fullName' => $fullName]);
         return $statement->fetch();
     }
 
-    public function deleteStudent(string $studentID) {
+    public function delete(string $studentID) {
         $statement = $this->pdo->prepare("DELETE FROM students WHERE student_id = :studentID");
         $statement->execute([':studentID' => $studentID]);
+    }
+
+    public function update(string $studentID, string $fullName, string $email, string $gender, string $address, string $gradeLevel) {
+        $statement = $this->pdo->prepare("UPDATE students SET 
+                                            full_name = :fullName,
+                                            email = :email,
+                                            address = :address,
+                                            gender = :gender,
+                                            grade_level = :gradeLevel
+                                            WHERE student_id = :studentID
+        ");
+        $statement->execute([
+            ':fullName' => $fullName,
+            ':email' => $email,
+            ':address' => $address,
+            ':gender' => $gender,
+            ':gradeLevel' => $gradeLevel,
+            ':studentID' => $studentID
+        ]);
     }
 }

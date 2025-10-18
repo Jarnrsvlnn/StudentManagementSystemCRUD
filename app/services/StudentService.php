@@ -48,6 +48,26 @@ class StudentService {
             throw new \Exception('Student not found!');
         }
         
-        $this->student->deleteStudent($studentID);
+        $this->student->delete($studentID);
+    }
+
+    public function updateStudent(array $studentData): void 
+    {
+        $studentID = $studentData['student-id'];
+        $fullName = $studentData['full-name'];
+        $email = $studentData['email'];
+        $gender = $studentData['gender'];
+        $address = $studentData['address'];
+        $gradeLevel = $studentData['grade-level'];
+
+        if (!$this->student->findByStudentID($studentID)) {
+            throw new \Exception('Student couldnt be found using that ID!');
+        }
+
+        if ($this->student->findByStudentName($fullName)) {
+            throw new \Exception('Student with that name already exists!');
+        }
+
+        $this->student->update($studentID, $fullName, $email, $gender, $address, $gradeLevel);
     }
 }

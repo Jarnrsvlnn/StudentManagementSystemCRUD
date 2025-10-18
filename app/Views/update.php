@@ -1,8 +1,13 @@
 <form class="row g-3" method="post">
-  <div class="col-md-6">
-    <label class="form-label">Student ID</label>
-    <input type="text" class="form-control" name="student-id" placeholder="2025XXXX" minlength="8" maxlength="8" pattern="2025\d{4}" inputmode="numeric" required>
-  </div>
+  <div class="col-12">
+    <label class="form-label">Choose Student to Update</label>
+    <select class="form-select" name="student-id" required>
+        <?php foreach($students as $student): ?>
+            <option value="<?= htmlspecialchars($student['student_id']) ?>"><?= htmlspecialchars($student['full_name']) ?></option>
+        <?php endforeach; ?>
+    </select>
+  </div>    
+  <h1>Input new values</h1>
   <div class="col-md-6">
     <label class="form-label">Full Name</label>
     <input type="text" class="form-control" name="full-name" required>
@@ -34,7 +39,7 @@
       <option value="10">Grade 10</option>
     </select>
   </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Create Student</button>
+  <div class="col-12">  
+    <button type="submit" class="btn btn-primary">Update Student</button>
   </div>
 </form>

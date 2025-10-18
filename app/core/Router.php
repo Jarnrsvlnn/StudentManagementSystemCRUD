@@ -60,7 +60,6 @@ class Router {
 
     public function renderOnlyView($view, $params): string {
         extract($params);
-        
         ob_start();
         include Application::$ROOT_DIR . "/app/Views/$view.php";
         return ob_get_clean();

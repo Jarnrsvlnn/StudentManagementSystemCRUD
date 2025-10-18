@@ -24,5 +24,8 @@ $app->router->post('/students/create', [StudentController::class, 'create']);
 $app->router->get('/students/delete', [StudentController::class, 'deleteForm']);
 $app->router->post('/students/delete', [StudentController::class, 'delete']);
 
+$app->router->get('/students/update', [StudentController::class, 'updateForm']);
+$app->router->post('/students/update', [StudentController::class, 'update']);
+
 $app->run();
 
