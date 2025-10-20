@@ -16,7 +16,8 @@ $app = new Application(new Router(new Response, new Request), dirname(__DIR__));
 $students = new StudentService($app->db->pdo, new Student);
 
 $app->router->get('/', 'dashboard');
-$app->router->get('/students', [StudentController::class, 'index']);
+$app->router->get('/students', [StudentController::class, 'index']);    
+$app->router->post('/students', [StudentController::class, 'index']);
 
 $app->router->get('/students/create', [StudentController::class, 'createForm']);
 $app->router->post('/students/create', [StudentController::class, 'create']);

@@ -19,6 +19,7 @@ class StudentController extends Controller {
     private PDO $pdo;
     private StudentService $studentService;
     private GradeLevelService $gradeLevelService;
+    public static $STUDENT_COUNT = 0;
 
     public function __construct()
     {
@@ -44,6 +45,7 @@ class StudentController extends Controller {
     public function create(Request $request) {
         $studentData = $request->getData();
         $this->studentService->createStudent($studentData);
+        self::$STUDENT_COUNT++;
         return $this->render('register');
     }
 
