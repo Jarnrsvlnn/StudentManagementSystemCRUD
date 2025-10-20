@@ -25,10 +25,10 @@ class StudentService {
         $studentID = $studentData['student-id'];
         $fullName = $studentData['full-name'];
         $email = $studentData['email'];
-        $section = $studentData['section'];
         $gender = $studentData['gender'];
         $address = $studentData['address'];
-        $gradeLevel = $studentData['grade-level'];
+        $sectionID = $studentData['section-id'];
+        $gradeLevelID = $studentData['grade-level-id'];
 
         if ($this->student->findByStudentID($studentID)) {
             throw new \Exception('Student with that ID already exists!');
@@ -38,7 +38,7 @@ class StudentService {
             throw new \Exception('Student with that name already exists!');
         }
 
-        $this->student->add($studentID, $fullName, $email, $section, $gender, $address, $gradeLevel);
+        $this->student->add($studentID, $fullName, $email, $gender, $address, $sectionID, $gradeLevelID);
     }
 
     public function deleteStudent(array $studentData): void
@@ -57,16 +57,16 @@ class StudentService {
         $studentID = $studentData['student-id'];
         $fullName = $studentData['full-name'];
         $email = $studentData['email'];
-        $section = $studentData['section'];
         $gender = $studentData['gender'];
         $address = $studentData['address'];
-        $gradeLevel = $studentData['grade-level'];
+        $sectionID = $studentData['section-id'];
+        $gradeLevelID = $studentData['grade-level-id'];
 
         $existingStudent = $this->student->findByStudentName($fullName);
         if ($existingStudent && $existingStudent['student_id'] !== $studentID) {
             throw new \Exception('Student with that name already exists!');
         }
 
-        $this->student->update($studentID, $fullName, $email, $section, $gender, $address, $gradeLevel);
+        $this->student->update($studentID, $fullName, $email, $gender, $address, $sectionID, $gradeLevelID);
     }
 }

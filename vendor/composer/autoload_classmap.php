@@ -73,6 +73,10 @@ return array(
     'app\\Core\\Response' => $baseDir . '/app/Core/Response.php',
     'app\\Core\\Router' => $baseDir . '/app/Core/Router.php',
     'app\\Helpers\\Format' => $baseDir . '/app/Helpers/Format.php',
+    'app\\Models\\GradeLevel' => $baseDir . '/app/Models/GradeLevel.php',
+    'app\\Models\\Section' => $baseDir . '/app/Models/Section.php',
     'app\\Models\\Student' => $baseDir . '/app/Models/Student.php',
+    'app\\Services\\GradeLevelService' => $baseDir . '/app/Services/GradeLevelService.php',
+    'app\\Services\\SectionService' => $baseDir . '/app/Services/SectionService.php',
     'app\\Services\\StudentService' => $baseDir . '/app/Services/StudentService.php',
 );

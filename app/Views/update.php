@@ -22,7 +22,7 @@
       <option selected>Select Section...</option>
       <option value="1">Section 1</option>
       <option value="2">Section 2</option>
-    </select>
+    </select>  
   </div>
   <div class="col-12">
     <label class="form-label">Address</label>
