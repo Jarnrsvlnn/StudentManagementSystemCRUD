@@ -19,9 +19,8 @@
     <label class="form-label">Section</label>
     <select class="form-select" name="section-id" required>
       <option selected>Select Section...</option>
-      <?php foreach($sections as $section): ?>
-        <option value="<?= htmlspecialchars($section['id']) ?>"><?= htmlspecialchars($section['section_name']) ?></option>
-      <?php endforeach; ?>
+      <option value="1">Section 1</option>
+      <option value="2">Section 2</option>
     </select>
   </div>
   <div class="col-md-6">

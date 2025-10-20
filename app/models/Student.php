@@ -23,7 +23,7 @@ class Student {
 
     public function add(string $studentID, string $fullName, string $email, string $gender, string $address, int $sectionID, int $gradeLevelID) {
         $statement = $this->pdo->prepare("INSERT INTO students (student_id, full_name, email, gender, address, section_id, grade_level_id) VALUES 
-        (:student_id, :full_name, :email, :gender, :address, :section, :grade_level)
+        (:student_id, :full_name, :email, :gender, :address, :section_id, :grade_level_id)
         "); 
 
         $statement->execute([

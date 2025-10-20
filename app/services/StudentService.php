@@ -4,20 +4,36 @@ declare(strict_types=1);
 
 namespace app\Services;
 
+use app\Models\Section;
 use app\Models\Student;
+use app\Services\SectionService;
 use PDO;
 
 class StudentService {
+
+    private SectionService $sectionService;
 
     public function __construct(
         private PDO $db,
         private Student $student
     )
-    {}
+    {
+        $this->sectionService = new SectionService($this->db, new Section);
+    }
 
     public function getAllStudents()
     {
         return $this->student->all();
+    }
+
+    public function assignSection(int $section, int $gradeLevelID): int
+    {
+        $sectionRow = $this->sectionService->getSectionByGradeLevel($section, $gradeLevelID);
+ 
+        if (!$sectionRow) {
+            throw new \Exception("Section not found for grade level ID: {$gradeLevelID}");
+        }
+        return $sectionRow['id'];
     }
     
     public function createStudent(array $studentData): void
@@ -27,8 +43,10 @@ class StudentService {
         $email = $studentData['email'];
         $gender = $studentData['gender'];
         $address = $studentData['address'];
-        $sectionID = $studentData['section-id'];
-        $gradeLevelID = $studentData['grade-level-id'];
+        $tempSectionID = (int) $studentData['section-id'];
+        $gradeLevelID = (int) $studentData['grade-level-id'];
+
+        $sectionID = $this->assignSection($tempSectionID, $gradeLevelID);
 
         if ($this->student->findByStudentID($studentID)) {
             throw new \Exception('Student with that ID already exists!');

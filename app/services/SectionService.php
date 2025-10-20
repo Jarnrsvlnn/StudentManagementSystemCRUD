@@ -19,7 +19,8 @@ class SectionService {
         return $this->section->getAll();
     }
 
-    public function getAllByGradeLevel(int $gradeLevelID) {
-        return $this->section->getByGradeLevel($gradeLevelID);
+    public function getSectionByGradeLevel(int $section, int $gradeLevel) {
+        return $this->section->getByGradeLevel($section, $gradeLevel);
     }
+
 }

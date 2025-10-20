@@ -21,11 +21,18 @@ class Section {
         return $statement->fetchAll();
     }
 
-    public function getByGradeLevel(int $gradeLevelID) {
-        $statement = $this->pdo->prepare("SELECT * FROM sections WHERE grade_level_id = :gradeLevelID");
+    public function getByGradeLevel(int $section, int $gradeLevel) {
+        $statement = $this->pdo->prepare("SELECT * FROM sections
+                                         WHERE grade_level_id = :gradeLevelID 
+                                         ORDER BY id ASC
+                                         LIMIT 1 OFFSET :offset"
+                                         );
+        $offset = $section - 1;
         $statement->execute([
-            ':gradeLevelID' => $gradeLevelID
+            ':gradeLevelID' => $gradeLevel,
+            ':offset' => $offset
         ]);
-        return $statement->fetchAll();
+        
+        return $statement->fetch();
     }
 }
