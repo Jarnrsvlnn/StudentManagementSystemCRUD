@@ -43,7 +43,7 @@ class StudentService {
         $email = $studentData['email'];
         $gender = $studentData['gender'];
         $address = $studentData['address'];
-        $tempSectionID = (int) $studentData['section-id'];
+        $tempSectionID = (int) $studentData['section-id'];  
         $gradeLevelID = (int) $studentData['grade-level-id'];
 
         $sectionID = $this->assignSection($tempSectionID, $gradeLevelID);

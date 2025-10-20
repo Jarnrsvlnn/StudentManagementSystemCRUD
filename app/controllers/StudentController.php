@@ -12,7 +12,6 @@ use app\Services\StudentService;
 use app\Models\GradeLevel;
 use app\Services\GradeLevelService;
 use app\Models\Section;
-use app\Services\SectionService;
 use PDO;
 
 class StudentController extends Controller {
@@ -20,14 +19,12 @@ class StudentController extends Controller {
     private PDO $pdo;
     private StudentService $studentService;
     private GradeLevelService $gradeLevelService;
-    private SectionService $sectionService;
 
     public function __construct()
     {
         $this->pdo = Application::$app->db->pdo;
         $this->studentService = new StudentService($this->pdo, new Student);
         $this->gradeLevelService = new GradeLevelService($this->pdo, new GradeLevel);
-        $this->sectionService = new SectionService($this->pdo, new Section);
     }
 
     public function index() 

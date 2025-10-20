@@ -17,7 +17,19 @@ class Student {
     }
 
     public function all() {
-        $statement = $this->pdo->query('SELECT * FROM students');
+        $statement = $this->pdo->query("SELECT 
+                                        s.student_id,
+                                        s.full_name,
+                                        s.email,
+                                        s.gender,
+                                        s.address,
+                                        sec.section_name,
+                                        gl.grade_num,
+                                        s.status
+                                        FROM students s
+                                        JOIN sections sec ON s.section_id = sec.id
+                                        JOIN grade_levels gl ON s.grade_level_id = gl.id
+                                        ");
         return $statement->fetchAll();
     }
 

@@ -18,8 +18,8 @@
             <td><?= htmlspecialchars($student['email']) ?></td>
             <td><?= htmlspecialchars($student['gender']) ?></td>
             <td><?= htmlspecialchars($student['address']) ?></td>
-            <td><?= htmlspecialchars($student['section']) ?></td>
-            <td><?= htmlspecialchars($student['grade_level']) ?></td>
+            <td><?= htmlspecialchars($student['section_name']) ?></td>
+            <td>Grade <?= htmlspecialchars($student['grade_num']) ?></td>
             <td><?= htmlspecialchars($student['status']) ?></td>
         </tr>
     <?php endforeach; ?>

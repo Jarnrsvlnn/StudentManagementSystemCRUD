@@ -19,8 +19,8 @@
     <label class="form-label">Section</label>
     <select class="form-select" name="section-id" required>
       <option selected>Select Section...</option>
-      <option value="1">Section 1</option>
-      <option value="2">Section 2</option>
+      <option value="2">Section 1</option>
+      <option value="1">Section 2</option>
     </select>
   </div>
   <div class="col-md-6">
