@@ -18,7 +18,7 @@
   </div>
   <div class="col-12">
     <label class="form-label">Section</label>
-    <select class="form-select" name="section" required>
+    <select class="form-select" name="section-id" required>
       <option selected>Select Section...</option>
       <option value="1">Section 1</option>
       <option value="2">Section 2</option>
@@ -39,12 +39,12 @@
   </div>
   <div class="col-md-6">
     <label class="form-label">Grade Level</label>
-    <select class="form-select" name="grade-level" required>
+    <select class="form-select" name="grade-level-id" required>
       <option selected>Select...</option>
-      <option value="7">Grade 7</option>
-      <option value="8">Grade 8</option>
-      <option value="9">Grade 9</option>
-      <option value="10">Grade 10</option>
+      <option value="1">Grade 7</option>
+      <option value="2">Grade 8</option>
+      <option value="3">Grade 9</option>
+      <option value="4">Grade 10</option>
     </select>
   </div>
   <div class="col-12">  

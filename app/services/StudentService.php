@@ -77,8 +77,10 @@ class StudentService {
         $email = $studentData['email'];
         $gender = $studentData['gender'];
         $address = $studentData['address'];
-        $sectionID = $studentData['section-id'];
-        $gradeLevelID = $studentData['grade-level-id'];
+        $tempSectionID = (int) $studentData['section-id'];
+        $gradeLevelID = (int) $studentData['grade-level-id'];
+
+        $sectionID = $this->assignSection($tempSectionID, $gradeLevelID);
 
         $existingStudent = $this->student->findByStudentName($fullName);
         if ($existingStudent && $existingStudent['student_id'] !== $studentID) {
