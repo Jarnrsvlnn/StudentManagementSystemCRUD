@@ -46,15 +46,23 @@ class Router {
         return call_user_func($callback);
     }
 
-    public function renderView(string $view, array $params = []) {
+    public function renderView(string $view, array $params = [], string $subLayout = 'BaseLayout') {
         $layoutContent = $this->renderLayout();
         $viewContent = $this->renderOnlyView($view, $params);
-        return str_replace('{{content}}', $viewContent, $layoutContent); 
+        $subLayoutContent = $this->renderSubLayout($subLayout);
+        $finalViewContent = str_replace('{{content}}', $viewContent, $subLayoutContent);
+        return str_replace('{{content}}', $finalViewContent, $layoutContent); 
     }
 
     public function renderLayout(): string {
         ob_start();
-        include Application::$ROOT_DIR . "/app/Views/layouts/main.php";
+        include Application::$ROOT_DIR . "/app/Views/layouts/RootLayout/main.php";
+        return ob_get_clean();
+    }
+
+    public function renderSubLayout(string $subLayout): string {
+        ob_start();
+        include Application::$ROOT_DIR . "/app/Views/layouts/$subLayout.php";
         return ob_get_clean();
     }
 

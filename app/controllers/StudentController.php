@@ -36,7 +36,9 @@ class StudentController extends Controller {
         [
             'students' => $students,
             'totalStudent' => $totalStudents
-        ]);
+        ],
+        'StudentViewLayout'
+        );
     }
 
     public function createForm() {
