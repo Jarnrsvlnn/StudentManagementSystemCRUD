@@ -19,7 +19,6 @@ class StudentController extends Controller {
     private PDO $pdo;
     private StudentService $studentService;
     private GradeLevelService $gradeLevelService;
-    public static $STUDENT_COUNT = 0;
 
     public function __construct()
     {
@@ -31,7 +30,13 @@ class StudentController extends Controller {
     public function index() 
     {
         $students = $this->studentService->getAllStudents();
-        return $this->render('students', ['students' => $students]);
+        $totalStudents = $this->studentService->getTotalStudents();
+
+        return $this->render('students', 
+        [
+            'students' => $students,
+            'totalStudent' => $totalStudents
+        ]);
     }
 
     public function createForm() {
@@ -45,7 +50,6 @@ class StudentController extends Controller {
     public function create(Request $request) {
         $studentData = $request->getData();
         $this->studentService->createStudent($studentData);
-        self::$STUDENT_COUNT++;
         return $this->render('register');
     }
 
@@ -55,10 +59,10 @@ class StudentController extends Controller {
     }
 
     public function delete(Request $request) {
-        
         $studentData = $request->getData();
         $this->studentService->deleteStudent($studentData);
-        return $this->render('delete');
+        $students = $this->studentService->getAllStudents();
+        return $this->render('delete', ['students' => $students]);
     }
 
     public function updateForm() {

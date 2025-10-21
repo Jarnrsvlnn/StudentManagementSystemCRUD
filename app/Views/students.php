@@ -12,9 +12,7 @@
     </div>
 </form>
 
-
-
-<h1>Student List</h1>
+<h1>All Students</h1>
 
 <table class="table table-striped-columns">
     <tr>
@@ -27,11 +25,8 @@
         <th class="table-dark">Grade Level</th>
         <th class="table-dark">Status</th>
     </tr>
-    <?php
 
-use app\Controllers\StudentController;
-
- foreach($students as $student): ?>
+    <?php foreach($students as $student): ?>
         <tr>
             <td><?= htmlspecialchars($student['student_id']) ?></td>
             <td><?= htmlspecialchars($student['full_name']) ?></td>
@@ -45,7 +40,7 @@ use app\Controllers\StudentController;
     <?php endforeach; ?>
     <tr>
         <th class="table-dark">Total Number of Students</th>
-        <td class="table-dark"><?= htmlspecialchars(StudentController::$STUDENT_COUNT)?></td>
+        <td class="table-dark"><?= htmlspecialchars($totalStudent)?></td>
     </tr>
 </table>
 <ul>

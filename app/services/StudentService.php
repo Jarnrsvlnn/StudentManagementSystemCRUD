@@ -89,4 +89,9 @@ class StudentService {
 
         $this->student->update($studentID, $fullName, $email, $gender, $address, $sectionID, $gradeLevelID);
     }
+
+    public function getTotalStudents(): int 
+    {
+        return $this->student->total();
+    }
 }

@@ -95,4 +95,10 @@ class Student {
             ':studentID' => $studentID
         ]);
     }
+
+    public function total(): int
+    {
+        $statement = $this->pdo->query('SELECT COUNT(*) FROM students');
+        return (int) $statement->fetchColumn();
+    }
 }
