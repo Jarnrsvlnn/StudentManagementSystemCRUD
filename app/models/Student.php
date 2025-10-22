@@ -29,6 +29,7 @@ class Student {
                                         FROM students s
                                         JOIN sections sec ON s.section_id = sec.id
                                         JOIN grade_levels gl ON s.grade_level_id = gl.id
+                                        ORDER BY gl.grade_num ASC
                                         ");
         return $statement->fetchAll();
     }

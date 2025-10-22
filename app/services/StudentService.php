@@ -26,6 +26,20 @@ class StudentService {
         return $this->student->all();
     }
 
+    public function sortStudents(array $students): array
+    {
+        $sortedPerGL = [];
+        
+        foreach ($students as $student) {
+            $gradeLevel = 'Grade ' . $student['grade_num'];
+            $section =  $student['section_name'];
+
+            $sortedPerGL[$gradeLevel][$section][] = $student;
+        }
+
+        return $sortedPerGL;
+    }
+
     public function assignSection(int $section, int $gradeLevelID): int
     {
         $sectionRow = $this->sectionService->getSectionByGradeLevel($section, $gradeLevelID);

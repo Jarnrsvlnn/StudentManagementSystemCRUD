@@ -27,24 +27,53 @@ class StudentController extends Controller {
         $this->gradeLevelService = new GradeLevelService($this->pdo, new GradeLevel);
     }
 
-    public function index() 
+    public function getCategory(Request $request)
     {
+        $data = $request->getData();
+
+    }
+
+    public function index(Request $request) 
+    {
+        $viewData = $request->getData();
+        $viewCategory = $viewData['category'] ?? 'all-students';
         $students = $this->studentService->getAllStudents();
         $totalStudents = $this->studentService->getTotalStudents();
 
-        return $this->render('students', 
-        [
-            'students' => $students,
-            'totalStudent' => $totalStudents
-        ],
-        'StudentViewLayout'
-        );
+        switch ($viewCategory) {
+            case "by-grade-level":
+                $sortedStudents = $this->studentService->sortStudents($students);
+                return $this->render('studentsPerGL', 
+                [
+                    'gradeLevels' => $sortedStudents,
+                    'totalStudent' => $totalStudents
+                ],
+                'StudentViewLayout'
+                );
+            case "by-section":
+                $sortedStudents = $this->studentService->sortStudents($students);
+                return $this->render('studentsPerSection', 
+                [
+                    'gradeLevels' => $sortedStudents,
+                    'totalStudent' => $totalStudents
+                ],
+                'StudentViewLayout'
+                );
+            default: 
+                return $this->render('students', 
+                [
+                    'students' => $students,
+                    'totalStudent' => $totalStudents
+                ],
+                'StudentViewLayout'
+                );
+        }
     }
 
     public function createForm() {
         $gradeLevels = $this->gradeLevelService->getAllGradeLevel();
-        return $this->render(
-            'register', [
+        return $this->render('register', 
+        [
             'gradeLevels' => $gradeLevels
         ]);
     }
@@ -57,24 +86,36 @@ class StudentController extends Controller {
 
     public function deleteForm() {
         $students = $this->studentService->getAllStudents();
-        return $this->render('delete', ['students' => $students]);
+        return $this->render('delete', 
+        [
+            'students' => $students
+        ]);
     }
 
     public function delete(Request $request) {
         $studentData = $request->getData();
         $this->studentService->deleteStudent($studentData);
         $students = $this->studentService->getAllStudents();
-        return $this->render('delete', ['students' => $students]);
+        return $this->render('delete', 
+        [
+            'students' => $students
+        ]);
     }
 
     public function updateForm() {
         $students = $this->studentService->getAllStudents();
-        return $this->render('update', ['students' => $students]);
+        return $this->render('update', 
+        [
+            'students' => $students
+        ]);
     }
 
     public function update(Request $request) {
         $studentData = $request->getData();
         $this->studentService->updateStudent($studentData);
-        return $this->render('update', ['students' => $this->studentService->getAllStudents()]);
+        return $this->render('update', 
+        [
+            'students' => $this->studentService->getAllStudents()
+        ]);
     }
 }
