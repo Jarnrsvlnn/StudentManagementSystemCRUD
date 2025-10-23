@@ -18,8 +18,11 @@ $students = new StudentService($app->db->pdo, new Student);
 $format = new Format();
 
 $app->router->get('/', 'dashboard');
-$app->router->get('/students', [StudentController::class, 'index']);    
-$app->router->post('/students', [StudentController::class, 'index']);
+$app->router->get('/students', 'StudentCredDashboard');
+$app->router->get('/grades', 'StudentGradesDashboard');
+
+$app->router->get('/students/read', [StudentController::class, 'index']);    
+$app->router->post('/students/read', [StudentController::class, 'index']);
 
 $app->router->get('/students/create', [StudentController::class, 'createForm']);
 $app->router->post('/students/create', [StudentController::class, 'create']);

@@ -27,6 +27,6 @@
     <div class="card-body">
     <h5 class="card-title">View Students</h5>
     <p class="card-text">Allows you to see all the students along with their information</p>
-    <a href="/students" class="btn btn-primary">View</a>
+    <a href="/students/read" class="btn btn-primary">View</a>
     </div>
 </div>      

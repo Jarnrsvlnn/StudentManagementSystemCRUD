@@ -33,7 +33,7 @@ class Router {
         }
 
         if (is_string($callback)) {
-            return $this->renderView($callback);
+            return $this->renderView('layouts', $callback);
         }
 
         if (is_array($callback)) {
@@ -46,9 +46,9 @@ class Router {
         return call_user_func($callback);
     }
 
-    public function renderView(string $view, array $params = [], string $subLayout = 'BaseLayout') {
+    public function renderView(string $tabGroup, string $view, array $params = [], string $subLayout = 'BaseLayout') {
         $layoutContent = $this->renderLayout();
-        $viewContent = $this->renderOnlyView($view, $params);
+        $viewContent = $this->renderOnlyView($tabGroup, $view, $params);
         $subLayoutContent = $this->renderSubLayout($subLayout);
         $finalViewContent = str_replace('{{content}}', $viewContent, $subLayoutContent);
         return str_replace('{{content}}', $finalViewContent, $layoutContent); 
@@ -66,10 +66,10 @@ class Router {
         return ob_get_clean();
     }
 
-    public function renderOnlyView($view, $params): string {
+    public function renderOnlyView($tabGroup, $view, $params): string {
         extract($params);
         ob_start();
-        include Application::$ROOT_DIR . "/app/Views/$view.php";
+        include Application::$ROOT_DIR . "/app/Views/$tabGroup/$view.php";
         return ob_get_clean();
     }
 }
