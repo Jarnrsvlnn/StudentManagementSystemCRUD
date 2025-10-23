@@ -12,7 +12,7 @@ use app\Services\GradeService;
 use app\Models\Grade;
 use PDO;
 
-class StudentController extends Controller {
+class GradeController extends Controller {
 
     private PDO $pdo;
     private GradeService $gradeService;

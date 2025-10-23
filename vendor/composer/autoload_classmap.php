@@ -65,6 +65,7 @@ return array(
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
     'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     'app\\Controllers\\AuthController' => $baseDir . '/app/Controllers/AuthController.php',
+    'app\\Controllers\\GradeController' => $baseDir . '/app/Controllers/GradeController.php',
     'app\\Controllers\\StudentController' => $baseDir . '/app/Controllers/StudentController.php',
     'app\\Core\\Application' => $baseDir . '/app/Core/Application.php',
     'app\\Core\\Controller' => $baseDir . '/app/Core/Controller.php',
