@@ -22,6 +22,12 @@ class Subject {
         return $statement->fetchAll();
     }
 
+    public function find(string $searcher, string $value)
+    {
+        $statement = $this->pdo->query("SELECT * FROM subjects WHERE $searcher = $value");
+        return $statement->fetch();
+    } 
+
     public function create(string $subjectName, string $subjectCode)
     {
         $statement = $this->pdo->prepare("INSERT INTO subjects (subject_name, subject_code) VALUES 
@@ -32,7 +38,6 @@ class Subject {
             ':subject_code' => $subjectCode
         ]);
     }
-
 
     public function delete(string $subjectCode) 
     {
