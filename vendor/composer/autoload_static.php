@@ -136,12 +136,16 @@ class ComposerStaticInit9ed426877703095d8900151b4ab6feeb
         'app\\Core\\Response' => __DIR__ . '/../..' . '/app/Core/Response.php',
         'app\\Core\\Router' => __DIR__ . '/../..' . '/app/Core/Router.php',
         'app\\Helpers\\Format' => __DIR__ . '/../..' . '/app/Helpers/Format.php',
+        'app\\Models\\Grade' => __DIR__ . '/../..' . '/app/Models/Grade.php',
         'app\\Models\\GradeLevel' => __DIR__ . '/../..' . '/app/Models/GradeLevel.php',
         'app\\Models\\Section' => __DIR__ . '/../..' . '/app/Models/Section.php',
         'app\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
+        'app\\Models\\Subject' => __DIR__ . '/../..' . '/app/Models/Subject.php',
         'app\\Services\\GradeLevelService' => __DIR__ . '/../..' . '/app/Services/GradeLevelService.php',
+        'app\\Services\\GradeService' => __DIR__ . '/../..' . '/app/Services/GradeService.php',
         'app\\Services\\SectionService' => __DIR__ . '/../..' . '/app/Services/SectionService.php',
         'app\\Services\\StudentService' => __DIR__ . '/../..' . '/app/Services/StudentService.php',
+        'app\\Services\\SubjectService' => __DIR__ . '/../..' . '/app/Services/SubjectService.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

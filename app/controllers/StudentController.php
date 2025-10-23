@@ -30,7 +30,6 @@ class StudentController extends Controller {
     public function getCategory(Request $request)
     {
         $data = $request->getData();
-
     }
 
     public function index(Request $request) 

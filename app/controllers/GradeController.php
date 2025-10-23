@@ -7,7 +7,6 @@ namespace app\Controllers;
 use app\Core\Application;
 use app\Core\Controller;
 use app\Core\Request;
-use app\Models\Student;
 use app\Services\StudentService;
 use app\Services\GradeService;
 use app\Models\Grade;
