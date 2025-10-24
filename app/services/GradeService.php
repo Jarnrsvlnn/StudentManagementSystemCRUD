@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace app\Services;
 
 use app\Models\Grade;
+use app\Helpers\Format;
 use PDO;
 
 class GradeService {
@@ -14,5 +15,24 @@ class GradeService {
         private Grade $gradeModel
     )
     {}  
+    
+    public function assignGrade(int $subjectID, int $studentID, float $grade, string $remarks) :void
+    {
+        $this->gradeModel->create($subjectID, $studentID, Format::formatGrade($grade), $remarks);
+    }
 
+    public function viewStudentGrades(): array
+    {
+        return $this->gradeModel->read();
+    }
+
+    public function updateStudentGrade(int $studentID, float $grade): void
+    {
+        $this->gradeModel->update($studentID, Format::formatGrade($grade));
+    }
+
+    public function deleteStudentGrade(int $studentID): void
+    {
+        $this->gradeModel->delete($studentID);
+    }
 }

@@ -51,5 +51,6 @@ $app->router->post('/grades/update', [GradeController::class, 'update']);
 
 $app->router->get('/grades/subject', [GradeController::class, 'createSubjectForm']);
 $app->router->post('/grades/subject', [GradeController::class, 'createSubject']);
+
 $app->run();
 

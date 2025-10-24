@@ -33,4 +33,9 @@ class Format {
         
         return 'Invalid Parameter';
     }
+
+    public static function formatGrade(float $grade) 
+    {   
+        return (float) number_format($grade, 2);
+    }
 }
