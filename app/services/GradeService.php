@@ -13,6 +13,6 @@ class GradeService {
         private PDO $db,
         private Grade $gradeModel
     )
-    {}
+    {}  
 
 }
