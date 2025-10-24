@@ -49,5 +49,7 @@ $app->router->post('/grades/delete', [GradeController::class, 'delete']);
 $app->router->get('/grades/update', [GradeController::class, 'updateForm']);
 $app->router->post('/grades/update', [GradeController::class, 'update']);
 
+$app->router->get('/grades/subject', [GradeController::class, 'createSubjectForm']);
+$app->router->post('/grades/subject', [GradeController::class, 'createSubject']);
 $app->run();
 

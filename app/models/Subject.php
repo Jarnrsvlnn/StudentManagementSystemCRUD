@@ -22,9 +22,17 @@ class Subject {
         return $statement->fetchAll();
     }
 
-    public function find(string $searcher, string $value)
+    public function findByName(string $subjectName)
     {
-        $statement = $this->pdo->query("SELECT * FROM subjects WHERE $searcher = $value");
+        $statement = $this->pdo->prepare("SELECT * FROM subjects WHERE subject_name = :subject_name");
+        $statement->execute([':subject_name' => $subjectName]);
+        return $statement->fetch();
+    } 
+
+    public function findByCode(string $subjectCode)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM subjects WHERE subject_code = :subject_code");
+        $statement->execute([':subject_code' => $subjectCode]);
         return $statement->fetch();
     } 
 

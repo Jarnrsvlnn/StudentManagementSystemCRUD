@@ -20,24 +20,24 @@ class SubjectService {
         return $this->subjectModel->all();
     }
 
-    public function findByCode(string $value)
+    public function findByCode(string $subjectCode)
     {
-        return $this->subjectModel->find('subject_code', $value);
+        return $this->subjectModel->findByCode($subjectCode);
     }
 
-    public function findByName(string $value)
+    public function findByName(string $subjectName)
     {
-        return $this->subjectModel->find('subject_name', $value);
+        return $this->subjectModel->findByName($subjectName);
     }
 
     public function createSubject(string $subjectName, string $subjectCode) 
     {
-        if ($this->findByCode($subjectCode)) {
-            return 'Subject with that subject code already exists!';
+        if ($this->findByCode($subjectCode)){
+            throw new \Exception("Subject code already exists");
         }
-
+        
         if ($this->findByName($subjectName)) {
-            return 'Subject with that subject name already exists';
+            throw new \Exception("Subject name already exists");
         }
 
         $this->subjectModel->create($subjectName, $subjectCode);
