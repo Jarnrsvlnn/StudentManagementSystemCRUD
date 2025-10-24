@@ -16,8 +16,15 @@ class GradeService {
     )
     {}  
     
-    public function assignGrade(int $subjectID, int $studentID, float $grade, string $remarks) :void
+    public function assignGrade(int $subjectID, int $studentID, float $grade): void
     {
+        if ($this->gradeModel->checkSubjectExists($subjectID, $studentID)) 
+        {
+            throw new \Exception("This student already has a subject $subjectID");
+        }
+
+        $remarks = $this->gradeRemark($grade);
+
         $this->gradeModel->create($subjectID, $studentID, Format::formatGrade($grade), $remarks);
     }
 
@@ -34,5 +41,11 @@ class GradeService {
     public function deleteStudentGrade(int $studentID): void
     {
         $this->gradeModel->delete($studentID);
+    }
+
+    public function gradeRemark(float $grade) 
+    {
+        if ($grade >= 70) return 'Passed';
+        return 'Failed';
     }
 }

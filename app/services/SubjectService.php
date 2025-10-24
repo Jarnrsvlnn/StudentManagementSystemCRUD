@@ -15,7 +15,7 @@ class SubjectService {
     )
     {}
 
-    public function viewAllSubjects()
+    public function getAllSubjects()
     {
         return $this->subjectModel->all();
     }

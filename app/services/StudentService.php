@@ -21,6 +21,11 @@ class StudentService {
         $this->sectionService = new SectionService($this->db, new Section);
     }
 
+    public function findByStudentID(string $studentID) 
+    {
+        return $this->student->findByStudentID($studentID);
+    }
+
     public function getAllStudents()
     {
         return $this->student->all();
