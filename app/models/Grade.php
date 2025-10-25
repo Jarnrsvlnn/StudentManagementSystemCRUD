@@ -86,13 +86,4 @@ class Grade {
             ':student_id' => $studentID
         ]);
     }
-
-    public function delete(int $studentID) 
-    {
-        $statement = $this->pdo->prepare("UPDATE student_grades SET 
-                                            grade = NULL
-                                            remarks = 'N/A'
-                                            WHERE student_id = :student_id");
-        $statement->execute([':student_id' => $studentID]);
-    }
 }

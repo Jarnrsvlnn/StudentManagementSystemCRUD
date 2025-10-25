@@ -38,11 +38,6 @@ class GradeService {
         $this->gradeModel->update($studentID, Format::formatGrade($grade));
     }
 
-    public function deleteStudentGrade(int $studentID): void
-    {
-        $this->gradeModel->delete($studentID);
-    }
-
     public function gradeRemark(float $grade) 
     {
         if ($grade >= 70) return 'Passed';
