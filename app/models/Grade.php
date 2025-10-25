@@ -62,7 +62,17 @@ class Grade {
 
     public function read()
     {
-        $statement = $this->pdo->query("SELECT * FROM student_grades");
+        $statement = $this->pdo->query("SELECT 
+                                        s.student_id,
+                                        s.full_name,
+                                        sub.subject_code,
+                                        g.grade,
+                                        g.remarks
+                                        FROM student_grades g
+                                        JOIN students s ON  g.student_id = s.id
+                                        JOIN subjects sub ON g.subject_id = sub.id
+                                        ORDER BY s.id ASC
+                                        ");
         return $statement->fetchAll();
     }
 
