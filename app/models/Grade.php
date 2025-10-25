@@ -16,12 +16,27 @@ class Grade {
     {
         $this->pdo = Application::$app->db->pdo;
     }
+
+    public function getAllQuarterGrades() 
+    {
+        $statement = $this->pdo->query("SELECT * FROM quarter_grades");
+    }
     
     public function getStudentGrades(int $studentID) 
     {
         $statement = $this->pdo->prepare("SELECT * FROM student_grades WHERE student_id = :student_id");
         $statement->execute([':student_id' => $studentID]);
         return $statement->fetchAll();
+    }
+
+    public function getStudentGrade(int $subjectID, int $studentID) 
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM student_grades WHERE subject_id = :subject_id AND student_id = :student_id");
+        $statement->execute([
+            ':subject_id' => $subjectID,
+            ':student_id' => $studentID
+        ]);
+        return $statement->fetch();
     }
 
     public function checkSubjectExists(int $subjectID, int $studentID): bool
@@ -39,25 +54,28 @@ class Grade {
         return false;
     }
 
-    public function create(int $subjectID, int $studentID, float $grade, string $remarks) 
+    public function createQuarterGrade(int $studentGradeID, string $quarter, float $grade) 
     {
-        try 
-        {
-            $statement = $this->pdo->prepare("INSERT INTO student_grades (subject_id, student_id, grade, remarks) VALUES 
-                                                (:subject_id, :student_id, :grade, :remarks)");
-            $statement->execute([
-                ':subject_id' => $subjectID,
-                ':student_id' => $studentID,
-                ':grade' => $grade,
-                ':remarks' => $remarks
-            ]);
-        } catch(PDOException $e) {
-            if ($e->getCode() === '23000') {
-                throw new \Exception("This student already has this $subjectID subject.");
-            }
+        $statement = $this->pdo->prepare("INSERT INTO quarter_grades (student_grade_id, quarter, grade) VALUES 
+                                            (:student_grade_id, :quarter, :grade)
+                                            ");
+        $statement->execute([
+            ':student_grade_id' => $studentGradeID,
+            ':quarter' => $quarter,
+            ':grade' => $grade
+        ]);
+    }
 
-            throw $e;
-        }
+    public function createStudentGrade(int $subjectID, int $studentID, string $remarks)
+    {
+        $statement = $this->pdo->prepare("INSERT INTO student_grades (subject_id, student_id, remarks) VALUES
+                                        (:subject_id, :student_id, :remarks)
+                                        ");
+        $statement->execute([
+            ':subject_id' => $subjectID,
+            ':student_id' => $studentID,
+            ':remarks' => $remarks
+        ]);                                        
     }
 
     public function read()

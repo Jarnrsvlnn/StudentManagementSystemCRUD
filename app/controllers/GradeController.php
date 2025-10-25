@@ -52,17 +52,20 @@ class GradeController extends Controller {
     {
         $students = $this->studentService->getAllStudents();
         $subjects = $this->subjectService->getAllSubjects();
-        $gradeData = $request->getData();
+        $data = $request->getData();
 
-        $subjectData = $this->subjectService->findByCode($gradeData['subject-code']);
-        $subjectID = $subjectData['id'];
-
-        $studentData = $this->studentService->findByStudentID($gradeData['student-id']);
+        // assign grade data first into the student_grades table
+        $subjectID = (int) $data['subject-id'];
+        $studentData = $this->studentService->findByStudentID($data['student-id']);
         $studentID = $studentData['id'];
+        $this->gradeService->assignStudentGrade($subjectID, $studentID);
 
-        $grade = (float) $gradeData['grade'];
-
-        $this->gradeService->assignGrade($subjectID, $studentID, $grade);
+        // assigning quarter grades for each grade data from student_grades into quarter_grades table
+        $studentGradeID = $this->gradeService->getStudentGradeID($subjectID, $studentID);
+        $quarter = $data['quarter'];
+        $grade = (float) $data['grade'];
+        $this->gradeService->assignQuarterGrade($studentGradeID, $quarter, $grade);
+        
         return $this->render('StudentGrades', 'assignGrades', 
         [
             'students' => $students,

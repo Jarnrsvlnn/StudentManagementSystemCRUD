@@ -16,16 +16,19 @@ class GradeService {
     )
     {}  
     
-    public function assignGrade(int $subjectID, int $studentID, float $grade): void
+    public function assignQuarterGrade(int $studentGradeID, string $quarter, float $grade): void
     {
-        if ($this->gradeModel->checkSubjectExists($subjectID, $studentID)) 
-        {
-            throw new \Exception("This student already has a subject $subjectID");
-        }
-
         $remarks = $this->gradeRemark($grade);
 
-        $this->gradeModel->create($subjectID, $studentID, Format::formatGrade($grade), $remarks);
+        $this->gradeModel->createQuarterGrade($studentGradeID, $quarter, Format::formatGrade($grade));
+    }
+
+    public function assignStudentGrade(int $subjectID, int $studentID, float $finalGrade = 60.00) 
+    {   
+        $remarks = $this->gradeRemark($finalGrade);
+        if (!$this->gradeModel->getStudentGrade($subjectID, $studentID)) {
+            $this->gradeModel->createStudentGrade($subjectID, $studentID, $remarks);
+        }
     }
 
     public function viewStudentGrades(): array
@@ -42,5 +45,16 @@ class GradeService {
     {
         if ($grade >= 70) return 'Passed';
         return 'Failed';
+    }
+
+    public function getAllQuarters()
+    {
+        return $this->gradeModel->getAllQuarterGrades();
+    }
+
+    public function getStudentGradeID(int $subjectID, int $studentID) 
+    {
+        $studentGradeRow = $this->gradeModel->getStudentGrade($subjectID, $studentID);
+        return $studentGradeRow['id'];
     }
 }
