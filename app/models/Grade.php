@@ -22,7 +22,7 @@ class Grade {
         $statement = $this->pdo->query("SELECT * FROM quarter_grades");
     }
     
-    public function getStudentGrades(int $studentID) 
+    public function allStudentGrades(int $studentID) 
     {
         $statement = $this->pdo->prepare("SELECT * FROM student_grades WHERE student_id = :student_id");
         $statement->execute([':student_id' => $studentID]);
@@ -41,7 +41,7 @@ class Grade {
 
     public function checkSubjectExists(int $subjectID, int $studentID): bool
     {
-        $studentGrades = $this->getStudentGrades($studentID);
+        $studentGrades = $this->allStudentGrades($studentID);
 
         foreach($studentGrades as $grades) 
         {
