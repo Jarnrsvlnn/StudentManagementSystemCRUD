@@ -43,9 +43,6 @@ $app->router->get('/grades/all', [GradeController::class, 'index']);
 $app->router->get('/grades/create', [GradeController::class, 'createForm']);
 $app->router->post('/grades/create', [GradeController::class, 'create']);
 
-$app->router->get('/grades/delete', [GradeController::class, 'deleteForm']);
-$app->router->post('/grades/delete', [GradeController::class, 'delete']);
-
 $app->router->get('/grades/update', [GradeController::class, 'updateForm']);
 $app->router->post('/grades/update', [GradeController::class, 'update']);
 

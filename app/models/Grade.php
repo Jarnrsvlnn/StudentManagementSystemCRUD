@@ -54,6 +54,16 @@ class Grade {
         return false;
     }
 
+    public function checkIfGraded(int $studentGradeID, string $quarter): array|bool
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM quarter_grades WHERE student_grade_id = :student_grade_id AND quarter = :quarter");
+        $statement->execute([
+            ':student_grade_id' => $studentGradeID,
+            ':quarter' => $quarter
+        ]);
+        return $statement->fetch();
+    }
+
     public function createQuarterGrade(int $studentGradeID, string $quarter, float $grade) 
     {
         $statement = $this->pdo->prepare("INSERT INTO quarter_grades (student_grade_id, quarter, grade) VALUES 
@@ -103,5 +113,16 @@ class Grade {
             ':grade' => $grade,
             ':student_id' => $studentID
         ]);
+    }
+
+
+    public function calculateFinalGrade()
+    {
+        $statement = $this->pdo->prepare("SELECT student_grade_id, AVG(grade) AS final_grade
+                                            FROM quarter_grades
+                                            GROUP BY student_grade_id
+                                            ");
+        $statement->execute();
+        return $statement->fetchAll();
     }
 }
