@@ -36,7 +36,7 @@ class GradeService {
         }
     }
 
-    public function viewStudentGrades(): array
+    `public function viewStudentGrades(): array
     {
         return $this->gradeModel->read();
     }
