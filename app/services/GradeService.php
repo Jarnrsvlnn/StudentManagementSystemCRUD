@@ -46,7 +46,7 @@ class GradeService {
         $this->gradeModel->update($studentID, Format::formatGrade($grade));
     }
 
-    public function gradeRemark(float $grade) 
+    public function gradeRemark(int|float $grade) 
     {
         if ($grade >= 70) return 'Passed';
         return 'Failed';
@@ -66,6 +66,10 @@ class GradeService {
     public function calculateFinalGrade(int $studentGradeID) 
     {
         $finalGradesData = $this->gradeModel->getFinalGradeData($studentGradeID);
-        $this->gradeModel->updateFinalGrade((float) $finalGradesData['final_grade'], $finalGradesData['student_grade_id']);
+        $finalGrade = (float) $finalGradesData['final_grade'];
+        $studentGradeID = $finalGradesData['student_grade_id'];
+
+        $this->gradeModel->updateFinalGrade($finalGrade, $studentGradeID);
+        $this->gradeModel->updateRemark($this->gradeRemark($finalGrade), $studentGradeID);
     }
 }   

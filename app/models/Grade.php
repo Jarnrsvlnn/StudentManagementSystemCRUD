@@ -136,4 +136,13 @@ class Grade {
             ':student_grade_id' => $studentGradeID
         ]);
     }
+
+    public function updateRemark(string $remarks, int $studentGradeID) 
+    {
+        $statement = $this->pdo->prepare("UPDATE student_grades SET remarks = :remarks WHERE id = :student_grade_id");
+        $statement->execute([
+            ':remarks' => $remarks,
+            ':student_grade_id' => $studentGradeID
+        ]);
+    }
 }
