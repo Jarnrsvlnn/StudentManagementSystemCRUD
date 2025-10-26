@@ -66,6 +66,7 @@ class GradeController extends Controller {
         $grade = (float) $data['grade'];
         $this->gradeService->assignQuarterGrade($studentGradeID, $quarter, $grade);
         
+        $this->gradeService->calculateFinalGrade($studentGradeID);
         return $this->render('StudentGrades', 'assignGrades', 
         [
             'students' => $students,

@@ -36,7 +36,7 @@ class GradeService {
         }
     }
 
-    `public function viewStudentGrades(): array
+    public function viewStudentGrades(): array
     {
         return $this->gradeModel->read();
     }
@@ -63,8 +63,9 @@ class GradeService {
         return $studentGradeRow['id'];
     }
 
-    public function calculateFinalGrade()
+    public function calculateFinalGrade(int $studentGradeID) 
     {
-        return $this->gradeModel->calculateFinalGrade();
+        $finalGradesData = $this->gradeModel->getFinalGradeData($studentGradeID);
+        $this->gradeModel->updateFinalGrade((float) $finalGradesData['final_grade'], $finalGradesData['student_grade_id']);
     }
 }   

@@ -115,14 +115,25 @@ class Grade {
         ]);
     }
 
-
-    public function calculateFinalGrade()
+    public function getFinalGradeData(int $studentGradeID)
     {
         $statement = $this->pdo->prepare("SELECT student_grade_id, AVG(grade) AS final_grade
                                             FROM quarter_grades
+                                            WHERE student_grade_id = :student_grade_id
                                             GROUP BY student_grade_id
                                             ");
-        $statement->execute();
-        return $statement->fetchAll();
+        $statement->execute([
+            ':student_grade_id' => $studentGradeID
+        ]);
+        return $statement->fetch();
+    }
+
+    public function updateFinalGrade(float|int $finalGrade, int $studentGradeID)
+    {
+        $statement = $this->pdo->prepare("UPDATE student_grades SET final_grade = :final_grade WHERE id = :student_grade_id");
+        $statement->execute([
+            ':final_grade' => $finalGrade,
+            ':student_grade_id' => $studentGradeID
+        ]);
     }
 }
