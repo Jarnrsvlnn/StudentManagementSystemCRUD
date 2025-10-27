@@ -94,11 +94,17 @@ class Grade {
                                         s.student_id,
                                         s.full_name,
                                         sub.subject_code,
-                                        g.grade,
-                                        g.remarks
-                                        FROM student_grades g
-                                        JOIN students s ON  g.student_id = s.id
-                                        JOIN subjects sub ON g.subject_id = sub.id
+                                        MAX(CASE WHEN qg.quarter = '1st' THEN qg.grade END) as q1,
+                                        MAX(CASE WHEN qg.quarter = '2nd' THEN qg.grade END) as q2,
+                                        MAX(CASE WHEN qg.quarter = '3rd' THEN qg.grade END) as q3,
+                                        MAX(CASE WHEN qg.quarter = '4th' THEN qg.grade END) as q4,
+                                        sg.final_grade,
+                                        sg.remarks
+                                        FROM student_grades sg
+                                        JOIN students s ON sg.student_id = s.id
+                                        JOIN subjects sub ON sg.subject_id = sub.id
+                                        LEFT JOIN quarter_grades qg ON sg.id = qg.student_grade_id
+                                        GROUP BY sg.id, s.student_id, s.full_name, sub.subject_code, sg.final_grade, sg.remarks 
                                         ORDER BY s.id ASC
                                         ");
         return $statement->fetchAll();
