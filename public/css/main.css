@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.outer-container {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid red;
+    height: 100vh;
+}
+
+.sidebar-container {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(12, 20, 30);
+    color: white;
+    flex: 1;
+    min-width: 150px;
+    max-width: 260px;
+}
+
+.sidebar-container div {
+    border: 1px solid white;
+    flex: 2;
+}
+
+.sidebar-container .profile-section {
+    flex: 1.2;
+}
+
+.sidebar-container .logout-container {
+    height: 1vh;
+}
+
+.content-container {
+    flex: 1;
+}       
