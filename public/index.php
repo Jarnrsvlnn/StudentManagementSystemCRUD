@@ -19,11 +19,12 @@ $students = new StudentService($app->db->pdo, new Student);
 $format = new Format();
 
 $app->router->get('/', 'dashboard');
+$app->router->get('/student', 'StudentMenu');
 
 // for students' credential
-$app->router->get('/students', 'StudentCredDashboard');
 
-$app->router->get('/students/read', [StudentController::class, 'index']);    
+
+$app->router->get('/credential', [StudentController::class, 'index']);    
 $app->router->post('/students/read', [StudentController::class, 'index']);
 
 $app->router->get('/students/create', [StudentController::class, 'createForm']);

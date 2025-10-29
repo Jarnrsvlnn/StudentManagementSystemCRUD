@@ -59,12 +59,11 @@ class StudentController extends Controller {
                 'StudentViewLayout'
                 );
             default: 
-                return $this->render('StudentCredentials', 'students', 
+                return $this->render('layouts', 'StudentCredDashboard', 
                 [
                     'students' => $students,
                     'totalStudent' => $totalStudents
-                ],
-                'StudentViewLayout'
+                ]
                 );
         }
     }

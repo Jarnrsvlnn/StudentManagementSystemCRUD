@@ -18,7 +18,7 @@
         <nav class="menu">
           <ul>  
             <a href="/"><li><span class="material-symbols-outlined">dashboard</span>Dashboard</li></a>
-            <a href="/students"><li><span class="material-symbols-outlined">school</span>Students</li></a>
+            <a href="/student"><li><span class="material-symbols-outlined">school</span>Students</li></a>
             <a href=""><li><span class="material-symbols-outlined">business_center</span>Teachers</li></a>
             <a href=""><li><span class="material-symbols-outlined">manage_history</span>Logs</li></a>
           </ul>
