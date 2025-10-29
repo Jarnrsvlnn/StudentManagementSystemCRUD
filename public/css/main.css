@@ -78,7 +78,7 @@ li, a {
     border-top: 3px ridge rgba(7, 10, 15, 0.528);
 }
 
-main {
+main .card-container {
     display: grid;
     padding: 5rem;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

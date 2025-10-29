@@ -33,7 +33,7 @@ class GradeController extends Controller {
     public function index() 
     {
         $grades = $this->gradeService->viewStudentGrades();
-        return $this->render('StudentGrades', 'readGrades', ['grades' => $grades]);
+        return $this->render('layouts', 'StudentGradesDashboard', ['grades' => $grades]);
     }
     
     public function createForm() 

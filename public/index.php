@@ -36,9 +36,8 @@ $app->router->get('/students/update', [StudentController::class, 'updateForm']);
 $app->router->post('/students/update', [StudentController::class, 'update']);
 
 // for students' grades manager
-$app->router->get('/grades', 'StudentGradesDashboard');
 
-$app->router->get('/grades/all', [GradeController::class, 'index']);    
+$app->router->get('/grades', [GradeController::class, 'index']);    
 
 $app->router->get('/grades/create', [GradeController::class, 'createForm']);
 $app->router->post('/grades/create', [GradeController::class, 'create']);
