@@ -47,14 +47,29 @@ class Router {
     }
 
     public function renderView(string $tabGroup, string $view, array $params = [], string $subLayout = 'BaseLayout') {
-        $layoutContent = $this->renderLayout();
-        $viewContent = $this->renderOnlyView($tabGroup, $view, $params);
+
+        // main.php where the design for sidebar and dashboard resides
+        $layoutContent = $this->renderRootLayout(); 
+
+        /***
+         * this renders the content to be put inside the root layout,
+         * tabGroup = refers to the folder in which the view content resides (layouts, StudentCredentials, & StudentGrades)
+         * view = refers to each individual content inside the said tab group which are to be put inside the sub layout (which is another layout on top of root layout)
+         * params = informations in a form of an array that is passed to the views and is accessed using the views
+         */
+        $viewContent = $this->renderOnlyView($tabGroup, $view, $params); 
+
+        // renders the sub layout which are nested inside the root layout (all layouts are using the BaseLayout as sub layout except for one which is StudentViewLayout which is used by students view)
         $subLayoutContent = $this->renderSubLayout($subLayout);
+
+        // replaces the {{content}} inside sub layouts with view contents, giving the whole content to be passed to the root layout
         $finalViewContent = str_replace('{{content}}', $viewContent, $subLayoutContent);
+
+        // finally replaces the {{content}} inside the root layout with the finalized view content
         return str_replace('{{content}}', $finalViewContent, $layoutContent); 
     }
 
-    public function renderLayout(): string {
+    public function renderRootLayout(): string {
         ob_start();
         include Application::$ROOT_DIR . "/app/Views/layouts/RootLayout/main.php";
         return ob_get_clean();

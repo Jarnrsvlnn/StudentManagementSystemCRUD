@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Students Manager</title>
-    <link rel="stylesheet" href="/css/main.css?v=1.0.3">
+    <link rel="stylesheet" href="/css/main.css?v=1.0.4">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   </head>
   <body>
@@ -17,10 +17,10 @@
         </section>
         <nav class="menu">
           <ul>  
-            <li><span class="material-symbols-outlined">dashboard</span><a href="">Dashboard</a></li>
-            <li><span class="material-symbols-outlined">school</span><a href="">Students</a></li>
-            <li><span class="material-symbols-outlined">business_center</span><a href="">Teachers</a></li>
-            <li><span class="material-symbols-outlined">manage_history</span><a href="">Logs</a></li>
+            <a href="/"><li><span class="material-symbols-outlined">dashboard</span>Dashboard</li></a>
+            <a href="/students"><li><span class="material-symbols-outlined">school</span>Students</li></a>
+            <a href=""><li><span class="material-symbols-outlined">business_center</span>Teachers</li></a>
+            <a href=""><li><span class="material-symbols-outlined">manage_history</span>Logs</li></a>
           </ul>
         </nav>
         <footer class="logout">
