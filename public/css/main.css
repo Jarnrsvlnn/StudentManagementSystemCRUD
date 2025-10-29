@@ -4,10 +4,15 @@
     box-sizing: border-box;
 }
 
-.outer-container {
+li, a {
+    text-decoration: none; 
+    color: white;
+    list-style-type: none;
+}
+
+.container {
     display: flex;
     flex-direction: row;
-    border: 1px solid red;
     height: 100vh;
 }
 
@@ -22,19 +27,53 @@
     max-width: 260px;
 }
 
-.sidebar-container div {
-    border: 1px solid white;
-    flex: 2;
+.sidebar-container .profile { 
+    display: flex;
+    flex: 0.8;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.sidebar-container .profile-section {
-    flex: 1.2;
+.profile .profile-pic {
+    border-radius: 50px;
+    height: 5rem;
+    width: 5rem;
+    background-color: white;
 }
 
-.sidebar-container .logout-container {
-    height: 1vh;
+.sidebar-container .menu { 
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex: 2.5; 
+    border-top: 3px ridge rgba(7, 10, 15, 0.528);
 }
+
+.menu ul {
+    text-align: left;
+    width: 100%;
+    margin-top: 2.5rem;
+}
+
+.menu ul li {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.sidebar-container .logout { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex: 0.5;
+    gap: 1rem;
+    border-top: 3px ridge rgba(7, 10, 15, 0.528);
+}
+
 
 .content-container {
     flex: 1;
-}       
+}           

@@ -4,28 +4,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Students Manager</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main.css?v=1.0.3">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   </head>
   <body>
-    <div class="outer-container">
-      <div class="sidebar-container">
-        <div class="profile-section">
-          <img src="" alt="admin-profile">
+    <div class="container">
+
+      <aside class="sidebar-container">
+        <section class="profile">
+          <div class="profile-pic"></div>
           <h2 class="username">Admin</h2>
-        </div>
-        <div class="tab-container">
-          <ul>
-            <a href="/students"><li>Student Credentials</li></a>
-            <a href="/grades"><li>Student Grades</li></a>
+        </section>
+        <nav class="menu">
+          <ul>  
+            <li><span class="material-symbols-outlined">dashboard</span><a href="">Dashboard</a></li>
+            <li><span class="material-symbols-outlined">school</span><a href="">Students</a></li>
+            <li><span class="material-symbols-outlined">business_center</span><a href="">Teachers</a></li>
+            <li><span class="material-symbols-outlined">manage_history</span><a href="">Logs</a></li>
           </ul>
-        </div>
-        <div class="logout-container">
+        </nav>
+        <footer class="logout">
+          <span class="material-symbols-outlined">logout</span>
           <a href="/logout"><h3>Logout</h3></a>
-        </div>
-      </div>
-      <div class="content-container">
+        </footer>
+      </aside>
+
+      <main class="content-container">  
           {{content}}
-      </div>
+      </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
