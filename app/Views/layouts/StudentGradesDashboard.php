@@ -17,10 +17,10 @@
                 <th rowspan="2">Remarks</th>
             </tr>
             <tr style="text-align: center;">
-                <th colspan="1">1st</th>
-                <th colspan="1">2nd</th>
-                <th colspan="1">3rd</th>
-                <th colspan="1">4th</th>
+                <th colspan="1">Q1</th>
+                <th colspan="1">Q2</th>
+                <th colspan="1">Q3</th>
+                <th colspan="1">Q4</th>
             </tr>
             
             <?php foreach($grades as $studentGrade): ?>
@@ -34,9 +34,9 @@
                     <td><?= htmlspecialchars($studentGrade['q4'] ?? '') ?></td>
                     <td><?= htmlspecialchars($studentGrade['final_grade']) ?></td>
                     <?php if ($studentGrade['final_grade'] >= 70): ?>
-                    <td style="color: green;"><?= htmlspecialchars($studentGrade['remarks']) ?></td>
+                        <td style="color: green;"><?= htmlspecialchars($studentGrade['remarks']) ?></td>
                     <?php else: ?>
-                    <td style="color: red;"><?= htmlspecialchars($studentGrade['remarks']) ?></td>
+                        <td style="color: red;"><?= htmlspecialchars($studentGrade['remarks']) ?></td>
                     <?php endif; ?>
                 </tr>
             <?php endforeach; ?>    
@@ -86,6 +86,33 @@
 <div class="student-grade-container">
     <div class="table-container">
         <table>
+            <tr>
+                <th>Name: (Insert name from an array here) </th>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <th>Q1</th>
+                <th>Q2</th>
+                <th>Q3</th>
+                <th>Q4</th>
+                <th>Final</th>
+                <th>Remarks</th>
+            </tr>
+            <?php foreach($studentGrades as $studentGrade): ?>
+                <tr>
+                    <td><?= htmlspecialchars($studentGrade['subject_code']) ?></td>
+                    <td><?= htmlspecialchars($studentGrade['q1'] ?? '') ?></td>
+                    <td><?= htmlspecialchars($studentGrade['q2'] ?? '') ?></td>
+                    <td><?= htmlspecialchars($studentGrade['q3'] ?? '') ?></td>
+                    <td><?= htmlspecialchars($studentGrade['q4'] ?? '') ?></td>
+                    <td><?= htmlspecialchars($studentGrade['final_grade']) ?></td>
+                    <?php if ($studentGrade['final_grade'] >= 70): ?>
+                        <td style="color: green;"><?= htmlspecialchars($studentGrade['remarks']) ?></td>
+                    <?php else: ?>
+                        <td style="color: red;"><?= htmlspecialchars($studentGrade['remarks']) ?></td>
+                    <?php endif; ?>
+                </tr>
+            <?php endforeach; ?>
         </table>
     </div>
 </div>

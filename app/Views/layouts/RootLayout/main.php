@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Students Manager</title>
-    <link rel="stylesheet" href="/css/main.css?v=1.0.5  ">
+    <link rel="stylesheet" href="/css/main.css?v=1.0.5">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   </head>
   <body>
@@ -17,14 +17,14 @@
         </section>
         <nav class="menu">
           <ul>  
-            <a href="/"><li><span>dashboard</span>Dashboard</li></a>
-            <a href="/student"><li><span>school</span>Students</li></a>
-            <a href=""><li><span>business_center</span>Teachers</li></a>
-            <a href=""><li><span>manage_history</span>Logs</li></a>
+            <a href="/"><li><span class="material-symbols-outlined">dashboard</span>Dashboard</li></a>
+            <a href="/student"><li><span class="material-symbols-outlined">school</span>Students</li></a>
+            <a href=""><li><span class="material-symbols-outlined">business_center</span>Teachers</li></a>
+            <a href=""><li><span class="material-symbols-outlined">manage_history</span>Logs</li></a>
           </ul>
         </nav>
         <footer class="logout">
-          <span>logout</span>
+          <span class="material-symbols-outlined">logout</span>
           <a href="/logout"><h3>Logout</h3></a>
         </footer>
       </aside>
@@ -33,7 +33,6 @@
           {{content}}
       </main>
     </div>
-    
     <script src="/js/main.js"></script>
   </body>
 </html>   
