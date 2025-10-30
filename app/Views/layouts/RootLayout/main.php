@@ -17,14 +17,14 @@
         </section>
         <nav class="menu">
           <ul>  
-            <a href="/"><li><span class="material-symbols-outlined">dashboard</span>Dashboard</li></a>
-            <a href="/student"><li><span class="material-symbols-outlined">school</span>Students</li></a>
-            <a href=""><li><span class="material-symbols-outlined">business_center</span>Teachers</li></a>
-            <a href=""><li><span class="material-symbols-outlined">manage_history</span>Logs</li></a>
+            <a href="/"><li><span>dashboard</span>Dashboard</li></a>
+            <a href="/student"><li><span>school</span>Students</li></a>
+            <a href=""><li><span>business_center</span>Teachers</li></a>
+            <a href=""><li><span>manage_history</span>Logs</li></a>
           </ul>
         </nav>
         <footer class="logout">
-          <span class="material-symbols-outlined">logout</span>
+          <span>logout</span>
           <a href="/logout"><h3>Logout</h3></a>
         </footer>
       </aside>
@@ -33,7 +33,7 @@
           {{content}}
       </main>
     </div>
+    
     <script src="/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   </body>
 </html>   
