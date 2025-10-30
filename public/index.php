@@ -40,8 +40,8 @@ $app->router->post('/students/update', [StudentController::class, 'update']);
 
 $app->router->get('/grades', [GradeController::class, 'index']);    
 
-$app->router->get('/grades/create', [GradeController::class, 'createForm']);
-$app->router->post('/grades/create', [GradeController::class, 'create']);
+$app->router->get('/grades', [GradeController::class, 'createForm']);
+$app->router->post('/grades', [GradeController::class, 'create']);
 
 $app->router->get('/grades/update', [GradeController::class, 'updateForm']);
 $app->router->post('/grades/update', [GradeController::class, 'update']);

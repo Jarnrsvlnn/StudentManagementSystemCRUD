@@ -19,12 +19,10 @@ class GradeService {
     public function assignQuarterGrade(int $studentGradeID, string $quarter, float $grade): void
     {
         $remarks = $this->gradeRemark($grade);
-        if ($this->gradeModel->checkIfGraded($studentGradeID, $quarter)) {
-            throw new \Exception("This subject's quarter is already graded.");
-            return;
+        if (!$this->gradeModel->checkIfGraded($studentGradeID, $quarter)) {
+            $this->gradeModel->createQuarterGrade($studentGradeID, $quarter, Format::formatGrade($grade));
         }
 
-        $this->gradeModel->createQuarterGrade($studentGradeID, $quarter, Format::formatGrade($grade));
     }   
 
     public function assignStudentGrade(int $subjectID, int $studentID, float|int $finalGrade = 60.00) 

@@ -38,18 +38,21 @@ class GradeController extends Controller {
     
     public function createForm() 
     {
+        $grades = $this->gradeService->viewStudentGrades();
         $students = $this->studentService->getAllStudents();
         $subjects = $this->subjectService->getAllSubjects();
 
-        return $this->render('StudentGrades', 'assignGrades', 
+        return $this->render('layouts', 'StudentGradesDashboard', 
         [
+            'grades' => $grades,
             'students' => $students,
             'subjects' => $subjects
         ]);
-    }
+    }   
 
     public function create(Request $request) 
     {
+        $grades = $this->gradeService->viewStudentGrades();
         $students = $this->studentService->getAllStudents();
         $subjects = $this->subjectService->getAllSubjects();
         $data = $request->getData();
@@ -67,8 +70,11 @@ class GradeController extends Controller {
         $this->gradeService->assignQuarterGrade($studentGradeID, $quarter, $grade);
         
         $this->gradeService->calculateFinalGrade($studentGradeID);
-        return $this->render('StudentGrades', 'assignGrades', 
+
+        header("Location: grades");
+        return $this->render('layouts', 'StudentGradesDashboard', 
         [
+            'grades' => $grades,
             'students' => $students,
             'subjects' => $subjects
         ]);
