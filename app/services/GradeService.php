@@ -28,7 +28,6 @@ class GradeService {
     {   
         $remarks = $this->gradeRemark($finalGrade);
         if (!$this->gradeModel->getStudentGrade($subjectID, $studentID)) {
-
             $this->gradeModel->createStudentGrade($subjectID, $studentID, $remarks);
         }
     }

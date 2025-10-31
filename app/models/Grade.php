@@ -119,6 +119,11 @@ class Grade {
                                         sg.remarks
                                         FROM student_grades sg
                                         JOIN students s ON sg.student_id = s.id
+                                        WHERE sg.id = (
+                                            SELECT MIN(id)
+                                            FROM student_grades
+                                            WHERE student_id = sg.student_id
+                                        )
                                         ORDER BY s.id ASC                        
                                         ");
         return $statement->fetchAll();                                        

@@ -38,6 +38,7 @@ $app->router->post('/students/update', [StudentController::class, 'update']);
 // for students' grades manager
 
 $app->router->get('/grades', [GradeController::class, 'indexAvgGrade']);    
+$app->router->post('/grades', [GradeController::class, 'createGrade']);   
 
 $app->router->get('/grades/update', [GradeController::class, 'updateForm']);
 $app->router->post('/grades/update', [GradeController::class, 'update']);

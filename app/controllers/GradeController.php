@@ -7,13 +7,13 @@ namespace app\Controllers;
 use app\Core\Application;
 use app\Core\Controller;
 use app\Core\Request;
-use app\Helpers\Format;
 use app\Services\StudentService;
 use app\Services\GradeService;
 use app\Models\Grade;
 use app\Models\Student;
 use app\Models\Subject;
 use app\Services\SubjectService;
+use app\Helpers\Format;
 use PDO;
 
 class GradeController extends Controller {
@@ -32,18 +32,16 @@ class GradeController extends Controller {
     }
 
     public function indexAvgGrade() 
-    {   
-        $avgGradeData = $this->gradeService->viewAvgGrades();
-
-        Format::debugStructure($avgGradeData);
-        return $this->render('layouts', 'StudentGradesDashboard', [
-            'avgGrades' => $avgGradeData
-        ]);
-    }
-
-    public function indexQuarterlyGrade()
     {
-        // $grades = $this->gradeService->view();
+        $grades = $this->gradeService->viewAvgGrades();
+        $students = $this->studentService->getAllStudents();
+        $subjects = $this->subjectService->getAllSubjects();
+
+        return $this->render('layouts', 'StudentGradesDashboard', [
+            'avgGrades' => $grades,
+            'students' => $students,
+            'subjects' => $subjects
+        ]);
     }
     
     public function createForm() 
@@ -60,7 +58,7 @@ class GradeController extends Controller {
         ]);
     }   
 
-    public function create(Request $request) 
+    public function createGrade(Request $request) 
     {
         $grades = $this->gradeService->viewStudentGrades();
         $students = $this->studentService->getAllStudents();
@@ -80,6 +78,7 @@ class GradeController extends Controller {
         $this->gradeService->assignQuarterGrade($studentGradeID, $quarter, $grade);
         
         $this->gradeService->calculateFinalGrade($studentGradeID);
+        $this->gradeService->calculateAvgGrade($studentID);
 
         header("Location: grades");
         return $this->render('layouts', 'StudentGradesDashboard', 
