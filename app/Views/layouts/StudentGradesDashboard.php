@@ -6,38 +6,27 @@
     <div class="table-container">
         <table>
             <tr style="text-align: center;">
-                <th colspan="9">All Students' Grades</th>
+                <th colspan="5">All Students' Grades</th>
             </tr>
             <tr style="text-align: center;">
                 <th rowspan="2">Student ID</th>
                 <th rowspan="2">Full Name</th>
-                <th rowspan="2">Subject</th>
-                <th colspan="4">Quarter</th>
-                <th rowspan="2">Final Grade</th>
+                <th rowspan="2">Average Grade</th>
                 <th rowspan="2">Remarks</th>
-            </tr>
-            <tr style="text-align: center;">
-                <th colspan="1">Q1</th>
-                <th colspan="1">Q2</th>
-                <th colspan="1">Q3</th>
-                <th colspan="1">Q4</th>
+                <th rowspan="2">View</th>
             </tr>
             
-            <?php foreach($grades as $studentGrade): ?>
+            <?php foreach($avgGrades as $studentGrade): ?>
                 <tr style="text-align: center;">
                     <td><?= htmlspecialchars($studentGrade['student_id']) ?></td>
                     <td><?= htmlspecialchars($studentGrade['full_name']) ?></td>
-                    <td><?= htmlspecialchars($studentGrade['subject_code']) ?></td>
-                    <td><?= htmlspecialchars($studentGrade['q1'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($studentGrade['q2'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($studentGrade['q3'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($studentGrade['q4'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($studentGrade['final_grade']) ?></td>
-                    <?php if ($studentGrade['final_grade'] >= 70): ?>
+                    <td><?= htmlspecialchars($studentGrade['avg_grade'] ?? '') ?></td>
+                    <?php if ($studentGrade['avg_grade'] >= 70): ?>
                         <td style="color: green;"><?= htmlspecialchars($studentGrade['remarks']) ?></td>
                     <?php else: ?>
                         <td style="color: red;"><?= htmlspecialchars($studentGrade['remarks']) ?></td>
                     <?php endif; ?>
+                    <td><button><span class="material-symbols-outlined">keyboard_arrow_right</span></button></td>
                 </tr>
             <?php endforeach; ?>    
         </table>
@@ -87,16 +76,16 @@
     <div class="table-container">
         <table>
             <tr>
-                <th>Name: (Insert name from an array here) </th>
+                <th colspan="7">Name: (Insert name from an array here) </th>
             </tr>
             <tr>
-                <th>Subject</th>
-                <th>Q1</th>
-                <th>Q2</th>
-                <th>Q3</th>
-                <th>Q4</th>
-                <th>Final</th>
-                <th>Remarks</th>
+                <th colspan="2">Subject</th>
+                <th colspan="2">Q1</th>
+                <th colspan="2">Q2</th>
+                <th colspan="2">Q3</th>
+                <th colspan="2">Q4</th>
+                <th colspan="2">Final</th>
+                <th colspan="2">Remarks</th>
             </tr>
             <?php foreach($studentGrades as $studentGrade): ?>
                 <tr>

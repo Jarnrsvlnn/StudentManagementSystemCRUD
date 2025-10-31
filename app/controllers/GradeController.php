@@ -7,6 +7,7 @@ namespace app\Controllers;
 use app\Core\Application;
 use app\Core\Controller;
 use app\Core\Request;
+use app\Helpers\Format;
 use app\Services\StudentService;
 use app\Services\GradeService;
 use app\Models\Grade;
@@ -30,10 +31,19 @@ class GradeController extends Controller {
         $this->studentService = new StudentService($this->pdo, new Student);
     }
 
-    public function index() 
+    public function indexAvgGrade() 
+    {   
+        $avgGradeData = $this->gradeService->viewAvgGrades();
+
+        Format::debugStructure($avgGradeData);
+        return $this->render('layouts', 'StudentGradesDashboard', [
+            'avgGrades' => $avgGradeData
+        ]);
+    }
+
+    public function indexQuarterlyGrade()
     {
-        $grades = $this->gradeService->viewStudentGrades();
-        return $this->render('layouts', 'StudentGradesDashboard', ['grades' => $grades]);
+        // $grades = $this->gradeService->view();
     }
     
     public function createForm() 

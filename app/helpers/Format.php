@@ -38,4 +38,11 @@ class Format {
     {   
         return (float) number_format($grade, 2);
     }
+
+    public static function debugStructure(array $data)
+    {
+        echo '<pre>';
+        var_dump($data);
+        echo '</pre>';
+    }
 }

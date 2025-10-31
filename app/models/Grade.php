@@ -94,7 +94,7 @@ class Grade {
                                         s.student_id,
                                         s.full_name,
                                         sub.subject_code,
-                                        MAX(CASE WHEN qg.quarter = '1st' THEN qg.grade END) as q1,
+                                        MAX(CASE WHEN qg.quarter = '1st' THEN qg.grade END) as q1,  
                                         MAX(CASE WHEN qg.quarter = '2nd' THEN qg.grade END) as q2,
                                         MAX(CASE WHEN qg.quarter = '3rd' THEN qg.grade END) as q3,
                                         MAX(CASE WHEN qg.quarter = '4th' THEN qg.grade END) as q4,
@@ -110,6 +110,20 @@ class Grade {
         return $statement->fetchAll();
     }
 
+    public function readAvgGrades()
+    {
+        $statement = $this->pdo->query("SELECT 
+                                        s.student_id,
+                                        s.full_name,
+                                        sg.avg_grade,
+                                        sg.remarks
+                                        FROM student_grades sg
+                                        JOIN students s ON sg.student_id = s.id
+                                        ORDER BY s.id ASC                        
+                                        ");
+        return $statement->fetchAll();                                        
+    }
+    
     public function update(int $studentID, float $grade) 
     {
         $statement = $this->pdo->prepare("UPDATE student_grades SET
@@ -127,10 +141,25 @@ class Grade {
                                             FROM quarter_grades
                                             WHERE student_grade_id = :student_grade_id
                                             GROUP BY student_grade_id
-                                            ");
+                                        ");
         $statement->execute([
             ':student_grade_id' => $studentGradeID
         ]);
+
+        return $statement->fetch();
+    }
+
+    public function getAvgGradeData(int $studentID)
+    {   
+        $statement = $this->pdo->prepare("SELECT student_id, AVG(final_grade) AS avg_grade
+                                            FROM student_grades
+                                            WHERE student_id = :student_id
+                                            GROUP BY student_id
+                                        ");
+        $statement->execute([
+            ':student_id' => $studentID
+        ]);
+        
         return $statement->fetch();
     }
 
@@ -140,6 +169,15 @@ class Grade {
         $statement->execute([
             ':final_grade' => $finalGrade,
             ':student_grade_id' => $studentGradeID
+        ]);
+    }
+
+    public function updateAvgGrade(float|int $avgGrade, int $studentID)
+    {
+        $statement = $this->pdo->prepare("UPDATE student_grades SET avg_grade = :avg_grade WHERE student_id = :student_id");
+        $statement->execute([
+            ':avg_grade' => $avgGrade,
+            ':student_id' => $studentID
         ]);
     }
 
