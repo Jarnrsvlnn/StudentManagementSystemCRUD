@@ -9,10 +9,64 @@ li, a {
     color: white;
     list-style-type: none;
 }
+/* Container for the table to make it responsive and centered */
+.table-container {
+    max-width: 100%;
+    overflow-x: auto; /* Allows horizontal scrolling on small screens */
+    margin: 0 auto; /* Centers the table */
+    padding: 10px; /* Reduced from 20px to give more space to the table */
+    background-color: #1e1e1e; /* Dark gray background for the container */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
 
-table th {
-    background-color: black;
-    color: white;
+/* Basic table styling */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Removes default spacing between cells */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    font-size: 16px; /* Increased from 14px for larger text */
+    background-color: #2a2a2a; /* Darker gray for table */
+    border-radius: 8px;
+    overflow: hidden; /* Ensures rounded corners work */
+    color: #e0e0e0; /* Light gray text for readability */
+}
+
+/* Header row styling */
+th {
+    background-color: #333333; /* Dark header background */
+    color: #ffffff; /* White text */
+    padding: 15px; /* Increased from 12px for more space */
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid #555555; /* Subtle border */
+}
+
+/* Data cell styling */
+td {
+    padding: 12px; /* Increased from 10px for more space */
+    text-align: center;
+    border-bottom: 1px solid #444444; /* Dark border between rows */
+    color: #e0e0e0; /* Light gray text */
+}
+
+/* ... rest of your CSS remains the same ... */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .table-container {
+        padding: 5px; /* Further reduced for mobile */
+    }
+    
+    th, td {
+        padding: 10px; /* Adjusted for mobile */
+        font-size: 14px; /* Slightly larger than original 12px */
+    }
+    
+    td button {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
 }
 
 .container {
@@ -97,3 +151,191 @@ main .card {
     background-color: gray;
 }
 
+.grade-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* Dialog modal styling */
+.grade-dialog {
+    background-color: #1e1e1e; /* Dark background matching table container */
+    color: #e0e0e0; /* Light gray text for readability */
+    border: none; /* Removes default border */
+    border-radius: 12px; /* Rounded corners for modern look */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    padding: 20px; /* Internal spacing */
+    max-width: 500px; /* Limits width for readability */
+    width: 90%; /* Responsive width */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Matches table font */
+    position: fixed; /* Ensures modal positioning */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the dialog */
+    z-index: 1000; /* High z-index for overlay */
+}
+
+/* Backdrop for the modal (native dialog support) */
+.grade-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark overlay */
+}
+
+/* Close button styling */
+.close-dialog {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #333333; /* Dark button background */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.close-dialog:hover {
+    background-color: #555555; /* Lighter on hover */
+}
+
+/* Form container styling */
+.grade-dialog form {
+    display: flex;
+    flex-direction: column; /* Stacks form elements vertically */
+    gap: 15px; /* Spacing between sections */
+    margin-top: 30px; /* Space below close button */
+}
+
+/* Form div (each label-select/input group) */
+.grade-dialog form div {
+    display: flex;
+    flex-direction: column; /* Label on top, input below */
+    gap: 5px; /* Small gap between label and field */
+}
+
+/* Label styling */
+.grade-dialog label {
+    font-weight: bold;
+    color: #ffffff; /* White for emphasis */
+    font-size: 14px;
+}
+
+/* Select and input styling */
+.grade-dialog select,
+.grade-dialog input[type="number"] {
+    background-color: #2a2a2a; /* Dark input background */
+    color: #e0e0e0; /* Light text */
+    border: 1px solid #444444; /* Subtle border */
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 14px;
+    width: 100%; /* Full width within container */
+    box-sizing: border-box; /* Includes padding in width */
+    transition: border-color 0.3s ease;
+}
+
+.grade-dialog select:focus,
+.grade-dialog input[type="number"]:focus {
+    outline: none;
+    border-color: #007bff; /* Blue accent on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow */
+}
+
+/* Submit button styling (matches table button) */
+.grade-dialog button[type="submit"] {
+    background-color: #007bff; /* Blue accent */
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    align-self: flex-start; /* Aligns to left, or use center for centering */
+}
+
+.grade-dialog button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .grade-dialog {
+        padding: 15px; /* Reduced padding on mobile */
+        max-width: 90%; /* More width on small screens */
+    }
+    
+    .grade-dialog form {
+        gap: 10px; /* Tighter spacing */
+    }
+    
+    .grade-dialog select,
+    .grade-dialog input[type="number"] {
+        padding: 8px; /* Smaller padding */
+        font-size: 12px;
+    }
+    
+    .grade-dialog button[type="submit"] {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
+
+/* Container for the button above the table */
+.buttons-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Matches table's 5 columns */
+    gap: 10px; /* Optional gap to match table spacing; adjust as needed */
+    padding: 10px 0; /* Vertical spacing above the table */
+    margin-bottom: 10px; /* Space between button and table */
+    /* No background-color for transparency */
+}
+
+/* Add Grades button styling */
+.add-grades {
+    grid-column: 5; /* Positions in the last (5th) column, above View */
+    justify-self: end; /* Aligns button to the right within its grid cell */
+    background-color: #007bff; /* Blue accent matching other buttons */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 10px 20px; /* Comfortable size */
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Matches table font */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+.add-grades:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Subtle lift effect */
+}
+
+.add-grades:active {
+    transform: translateY(0); /* Resets on click */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .buttons-container {
+        grid-template-columns: 1fr; /* Stacks to single column on mobile for simplicity */
+        justify-items: center; /* Centers button on mobile */
+        padding: 5px 0;
+    }
+    
+    .add-grades {
+        grid-column: 1; /* Resets to first column on mobile */
+        justify-self: center; /* Centers it */
+        padding: 8px 15px; /* Smaller on mobile */
+        font-size: 14px;
+    }
+}

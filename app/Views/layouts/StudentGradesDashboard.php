@@ -1,6 +1,5 @@
 <div class="grade-container">
     <div class="buttons-container">
-        <button class="edit-grades">Edit</button>
         <button class="add-grades">Add</button>
     </div>
     <div class="table-container">
@@ -9,11 +8,11 @@
                 <th colspan="5">All Students' Grades</th>
             </tr>
             <tr style="text-align: center;">
-                <th rowspan="2">Student ID</th>
-                <th rowspan="2">Full Name</th>
-                <th rowspan="2">Average Grade</th>
-                <th rowspan="2">Remarks</th>
-                <th rowspan="2">View</th>
+                <th>Student ID</th>
+                <th>Full Name</th>
+                <th>Average Grade</th>
+                <th>Remarks</th>
+                <th>View</th>
             </tr>
             
             <?php foreach($avgGrades as $studentGrade): ?>
@@ -26,7 +25,7 @@
                     <?php else: ?>
                         <td style="color: red;"><?= htmlspecialchars($studentGrade['remarks']) ?></td>
                     <?php endif; ?>
-                    <td><button><span class="material-symbols-outlined">keyboard_arrow_right</span></button></td>
+                    <td><button onclick="location.href='/grades/quarterly'"><span class="material-symbols-outlined">keyboard_arrow_right</span></button></td>
                 </tr>
             <?php endforeach; ?>    
         </table>

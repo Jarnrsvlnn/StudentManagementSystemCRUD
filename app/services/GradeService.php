@@ -32,9 +32,9 @@ class GradeService {
         }
     }
 
-    public function viewStudentGrades(): array
+    public function viewIndividualGrade(): array
     {
-        return $this->gradeModel->read();
+        return $this->gradeModel->readIndividualGrade();
     }
 
     public function viewAvgGrades(): array

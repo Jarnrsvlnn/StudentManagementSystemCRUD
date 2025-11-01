@@ -88,7 +88,7 @@ class Grade {
         ]);                                        
     }
 
-    public function read()
+    public function readIndividualGrade()
     {
         $statement = $this->pdo->query("SELECT 
                                         s.student_id,
