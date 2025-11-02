@@ -25,7 +25,7 @@
                     <?php else: ?>
                         <td style="color: red;"><?= htmlspecialchars($studentGrade['remarks']) ?></td>
                     <?php endif; ?>
-                    <td><button onclick="location.href='/grades/quarterly'"><span class="material-symbols-outlined">keyboard_arrow_right</span></button></td>
+                    <td><button onclick="location.href='/grades/quarterly?student-id=<?= htmlspecialchars($studentGrade['id']) ?>'"><span class="material-symbols-outlined">keyboard_arrow_right</span></button></td>
                 </tr>
             <?php endforeach; ?>    
         </table>
@@ -33,7 +33,7 @@
 
     <dialog class="grade-dialog">
         <button class="close-dialog">Close</button>
-        <form method="post">
+        <form method="post" action="/grades/create">
             <div>
                 <label>Choose Student to Assign</label>
                 <select name="student-id" required>

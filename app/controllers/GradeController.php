@@ -34,6 +34,7 @@ class GradeController extends Controller {
     public function indexAvgGrade() 
     {
         $grades = $this->gradeService->viewAvgGrades();
+        Format::debugStructure($grades);
         $students = $this->studentService->getAllStudents();
         $subjects = $this->subjectService->getAllSubjects();
 
@@ -44,22 +45,22 @@ class GradeController extends Controller {
         ]);
     }
 
-    public function indexQuarterlyGrade() 
+    public function indexQuarterlyGrade(Request $request) 
     {
-        $grades = $this->gradeService->viewAvgGrades();
+        $quarterGradesData = $request->getData();
+        $studentID = (int) $quarterGradesData['student-id'];
+        $quarterGrades = $this->gradeService->viewStudentQuarterGrades($studentID);
+
+        Format::debugStructure($quarterGrades); 
+        
         $students = $this->studentService->getAllStudents();
         $subjects = $this->subjectService->getAllSubjects();
 
         return $this->render('StudentGrades', 'QuarterlyGrade', [
-            'avgGrades' => $grades,
+            'quarterGrades' => $quarterGrades,
             'students' => $students,
             'subjects' => $subjects
         ]);
-    }
-
-    public function indexIndividualGrade(Request $request) 
-    {   
-        
     }
     
     // public function createForm() 

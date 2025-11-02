@@ -3,7 +3,7 @@
     <div class="table-container">
         <table>
             <tr>
-                <th colspan="7">Name: (Insert name from an array here) </th>
+                <th colspan="7">Name:</th>
             </tr>
             <tr>
                 <th colspan="2">Subject</th>
@@ -14,14 +14,14 @@
                 <th colspan="2">Final</th>
                 <th colspan="2">Remarks</th>
             </tr>
-            <?php foreach($studentGrades as $studentGrade): ?>
+            <?php foreach($quarterGrades as $studentGrade): ?>
                 <tr>
-                    <td><?= htmlspecialchars($studentGrade['subject_code']) ?></td>
+                    <td><?= htmlspecialchars($studentGrade['subject_name']) ?></td>
                     <td><?= htmlspecialchars($studentGrade['q1'] ?? '') ?></td>
                     <td><?= htmlspecialchars($studentGrade['q2'] ?? '') ?></td>
                     <td><?= htmlspecialchars($studentGrade['q3'] ?? '') ?></td>
                     <td><?= htmlspecialchars($studentGrade['q4'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($studentGrade['final_grade']) ?></td>
+                    <td><?= htmlspecialchars($studentGrade['grade']) ?></td>
                     <?php if ($studentGrade['final_grade'] >= 70): ?>
                         <td style="color: green;"><?= htmlspecialchars($studentGrade['remarks']) ?></td>
                     <?php else: ?>
@@ -33,4 +33,4 @@
     </div>
 </div>
 
-
+                        

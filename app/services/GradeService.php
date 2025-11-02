@@ -32,9 +32,11 @@ class GradeService {
         }
     }
 
-    public function viewIndividualGrade(): array
+    public function viewStudentQuarterGrades(int $studentID) 
     {
-        return $this->gradeModel->readIndividualGrade();
+        $studentGradeID = $this->gradeModel->getStudentGradeID($studentID);  
+
+        return $this->gradeModel->getStudentQuarters($studentGradeID);
     }
 
     public function viewAvgGrades(): array

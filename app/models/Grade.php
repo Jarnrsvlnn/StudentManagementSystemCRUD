@@ -39,6 +39,29 @@ class Grade {
         return $statement->fetch();
     }
 
+    public function getStudentGradeID(int $studentID)
+    {
+        $statement = $this->pdo->prepare("SELECT MIN(id) as student_grade_id
+                                            FROM student_grades
+                                            WHERE student_id = :student_id
+                                            ");
+        $statement->execute([
+            ':student_id' => $studentID
+        ]);
+
+        return $statement->fetchColumn();
+    }
+
+    public function getStudentQuarters(int $studentGradeID) 
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM quarter_grades WHERE student_grade_id = :student_grade_id");
+        $statement->execute([
+            ':student_grade_id' => $studentGradeID
+        ]);
+
+        return $statement->fetchAll();
+    }
+
     public function checkSubjectExists(int $subjectID, int $studentID): bool
     {
         $studentGrades = $this->allStudentGrades($studentID);
@@ -91,9 +114,8 @@ class Grade {
     public function readIndividualGrade()
     {
         $statement = $this->pdo->query("SELECT 
-                                        s.student_id,
                                         s.full_name,
-                                        sub.subject_code,
+                                        sub.subject_name,   
                                         MAX(CASE WHEN qg.quarter = '1st' THEN qg.grade END) as q1,  
                                         MAX(CASE WHEN qg.quarter = '2nd' THEN qg.grade END) as q2,
                                         MAX(CASE WHEN qg.quarter = '3rd' THEN qg.grade END) as q3,
@@ -104,8 +126,7 @@ class Grade {
                                         JOIN students s ON sg.student_id = s.id
                                         JOIN subjects sub ON sg.subject_id = sub.id
                                         LEFT JOIN quarter_grades qg ON sg.id = qg.student_grade_id
-                                        GROUP BY sg.id, s.student_id, s.full_name, sub.subject_code, sg.final_grade, sg.remarks 
-                                        ORDER BY s.id ASC
+                                        GROUP BY s.full_name, sub.subject_name, sg.final_grade, sg.remarks 
                                         ");
         return $statement->fetchAll();
     }
@@ -113,6 +134,7 @@ class Grade {
     public function readAvgGrades()
     {
         $statement = $this->pdo->query("SELECT 
+                                        s.id AS id,
                                         s.student_id,
                                         s.full_name,
                                         sg.avg_grade,
