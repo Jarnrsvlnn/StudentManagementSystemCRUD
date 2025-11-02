@@ -34,9 +34,7 @@ class GradeService {
 
     public function viewStudentQuarterGrades(int $studentID) 
     {
-        $studentGradeID = $this->gradeModel->getStudentGradeID($studentID);  
-
-        return $this->gradeModel->getStudentQuarters($studentGradeID);
+        return $this->gradeModel->readStudentQuarterGrades($studentID);
     }
 
     public function viewAvgGrades(): array
