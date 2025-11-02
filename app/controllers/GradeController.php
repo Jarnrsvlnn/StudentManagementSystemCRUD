@@ -102,4 +102,10 @@ class GradeController extends Controller {
         $this->subjectService->createSubject($subjectData['subject-name'], $subjectData['subject-code']);
         return $this->render('StudentGrades', 'subjectForm');
     }
+
+    public function updateQuarterGrade(Request $request)
+    {
+        $gradeData = $request->getData();
+        
+    }
 }

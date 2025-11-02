@@ -39,6 +39,11 @@ class Grade {
         return $statement->fetch();
     }
 
+    public function getStudentGradeIDByID() 
+    {
+
+    }
+    
     public function readStudentQuarterGrades(int $studentID)
     {
         $statement = $this->pdo->prepare("SELECT 
@@ -135,10 +140,10 @@ class Grade {
         ]);                                        
     }
     
-    public function update(int $studentID, float $grade) 
+    public function updateQuarterGrade(int $studentID, float|int $q1, float|int $q2, float|int $q3, float|int $q4) 
     {
-        $statement = $this->pdo->prepare("UPDATE student_grades SET
-                                        grade = :grade
+        $statement = $this->pdo->prepare("UPDATE quarter_grades SET
+                                        
                                         WHERE student_id = :student_id");
         $statement->execute([
             ':grade' => $grade,

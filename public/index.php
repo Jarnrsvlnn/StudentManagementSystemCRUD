@@ -41,9 +41,7 @@ $app->router->get('/grades', [GradeController::class, 'indexAvgGrade']);
 $app->router->post('/grades/create', [GradeController::class, 'createGrade']);
 $app->router->get('/grades/quarterly', [GradeController::class, 'indexQuarterlyGrade']);
 
-
-$app->router->get('/grades/update', [GradeController::class, 'updateForm']);
-$app->router->post('/grades/update', [GradeController::class, 'update']);
+$app->router->post('/grades/quarterly', [GradeController::class, 'updateQuarterGrade']);
 
 $app->router->get('/grades/subject', [GradeController::class, 'createSubjectForm']);
 $app->router->post('/grades/subject', [GradeController::class, 'createSubject']);
