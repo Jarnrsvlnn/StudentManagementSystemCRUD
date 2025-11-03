@@ -53,6 +53,8 @@ class GradeController extends Controller {
         $students = $this->studentService->getAllStudents();
         $subjects = $this->subjectService->getAllSubjects();
 
+        Format::debugStructure($subjects);
+
         return $this->render('StudentGrades', 'QuarterlyGrade', [
             'quarterGrades' => $quarterGrades,
             'students' => $students,
@@ -105,7 +107,25 @@ class GradeController extends Controller {
 
     public function updateQuarterGrade(Request $request)
     {
-        $gradeData = $request->getData();
-        
+        // get the data needed from the form
+        $data = $request->getData();
+        $subjectID = (int) $data['subject-id'];
+        $studentID = (int) $_GET['student-id'];
+        $quarter = $data['quarter'];
+        $grade = (float) $data['grade'];
+
+        // update
+        $this->gradeService->updateQuarterGrade($subjectID, $studentID, $quarter, $grade);
+
+        // redeclare the essentials to render
+        $quarterGrades = $this->gradeService->viewStudentQuarterGrades($studentID);
+        $students = $this->studentService->getAllStudents();
+        $subjects = $this->subjectService->getAllSubjects();
+
+        return $this->render('StudentGrades', 'QuarterlyGrade', [
+            'quarterGrades' => $quarterGrades,
+            'students' => $students,
+            'subjects' => $subjects
+        ]);
     }
 }

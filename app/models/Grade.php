@@ -29,19 +29,14 @@ class Grade {
         return $statement->fetchAll();
     }
 
-    public function getStudentGrade(int $subjectID, int $studentID) 
+    public function getStudentGradeID(int $subjectID, int $studentID) 
     {
-        $statement = $this->pdo->prepare("SELECT * FROM student_grades WHERE subject_id = :subject_id AND student_id = :student_id");
+        $statement = $this->pdo->prepare("SELECT id FROM student_grades WHERE subject_id = :subject_id AND student_id = :student_id");
         $statement->execute([
             ':subject_id' => $subjectID,
             ':student_id' => $studentID
         ]);
         return $statement->fetch();
-    }
-
-    public function getStudentGradeIDByID() 
-    {
-
     }
     
     public function readStudentQuarterGrades(int $studentID)
@@ -140,14 +135,16 @@ class Grade {
         ]);                                        
     }
     
-    public function updateQuarterGrade(int $studentID, float|int $q1, float|int $q2, float|int $q3, float|int $q4) 
+    public function updateQuarterGrade(int $studentGradeID, string $quarter, float|int $grade) 
     {
         $statement = $this->pdo->prepare("UPDATE quarter_grades SET
-                                        
-                                        WHERE student_id = :student_id");
+                                            grade = :grade
+                                            WHERE quarter = :quarter AND student_grade_id = :student_grade_id
+                                        ");
         $statement->execute([
             ':grade' => $grade,
-            ':student_id' => $studentID
+            ':quarter' => $quarter,
+            ':student_grade_id' => $studentGradeID
         ]);
     }
 

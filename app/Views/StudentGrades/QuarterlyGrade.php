@@ -36,33 +36,25 @@
 
     <dialog class="edit-grade-dialog">
         <button class="close-dialog">Close</button>
-        <form action="post">
-            <table>
-                <tr>
-                    <th colspan="2">Subject</th>
-                    <th colspan="2">Q1</th>
-                    <th colspan="2">Q2</th>
-                    <th colspan="2">Q3</th>
-                    <th colspan="2">Q4</th>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <?= htmlspecialchars($studentGrades['subject-name'] ?? '') ?>
-                    </td>
-                    <td colspan="2">    
-                        <input name="q1" type="number">
-                    </td>
-                    <td colspan="2">
-                        <input name="q2" type="number">
-                    </td>
-                    <td colspan="2">
-                        <input name="q3" type="number">
-                    </td>
-                    <td colspan="2">
-                        <input name="q4" type="number">
-                    </td>
-                </tr>
-            </table>
+        
+        <form method="post">
+            <label>Select Subject</label>
+            <select name="subject-id">
+                <?php foreach($subjects as $subject): ?>
+                    <option value="<?= htmlspecialchars($subject['id']) ?>"><?= htmlspecialchars($subject['subject_name']) ?></option>
+                <?php endforeach; ?>
+            </select>
+
+            <label>Pick Quarter</label>
+            <select name="quarter">
+                <option value="1st">Q1</option>
+                <option value="2nd">Q2</option>
+                <option value="3rd">Q3</option>
+                <option value="4th">Q4</option>
+            </select>
+
+            <label>Enter new grade</label>
+            <input type="number" name="grade">
             <button type="submit" class="update-dialog">Update</button>
         </form>
     </dialog>

@@ -27,7 +27,7 @@ class GradeService {
     public function assignStudentGrade(int $subjectID, int $studentID, float|int $finalGrade = 60.00) 
     {   
         $remarks = $this->gradeRemark($finalGrade);
-        if (!$this->gradeModel->getStudentGrade($subjectID, $studentID)) {
+        if (!$this->gradeModel->getStudentGradeID($subjectID, $studentID)) {
             $this->gradeModel->createStudentGrade($subjectID, $studentID, $remarks);
         }
     }
@@ -42,10 +42,11 @@ class GradeService {
         return $this->gradeModel->readAvgGrades();
     }
     
-    public function updateStudentGrade(int $studentID, float $grade): void
+    public function updateQuarterGrade(int $subjectID, int $studentID, string $quarter, float|int $grade)
     {
-        $this->gradeModel->update($studentID, Format::formatGrade($grade));
-    }
+        $studentGradeID = $this->gradeModel->getStudentGradeID($subjectID, $studentID);
+        $this->gradeModel->updateQuarterGrade((int) $studentGradeID, $quarter, $grade);
+    }    
 
     public function gradeRemark(int|float $grade) 
     {
@@ -60,7 +61,7 @@ class GradeService {
 
     public function getStudentGradeID(int $subjectID, int $studentID) 
     {
-        $studentGradeRow = $this->gradeModel->getStudentGrade($subjectID, $studentID);
+        $studentGradeRow = $this->gradeModel->getStudentGradeID($subjectID, $studentID);
         return $studentGradeRow['id'];
     }
 
