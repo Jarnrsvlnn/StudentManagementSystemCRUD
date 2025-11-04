@@ -53,8 +53,6 @@ class GradeController extends Controller {
         $students = $this->studentService->getAllStudents();
         $subjects = $this->subjectService->getAllSubjects();
 
-        Format::debugStructure($subjects);
-
         return $this->render('StudentGrades', 'QuarterlyGrade', [
             'quarterGrades' => $quarterGrades,
             'students' => $students,

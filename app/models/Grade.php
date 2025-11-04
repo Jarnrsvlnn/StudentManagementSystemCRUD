@@ -36,7 +36,8 @@ class Grade {
             ':subject_id' => $subjectID,
             ':student_id' => $studentID
         ]);
-        return $statement->fetch();
+
+        return $statement->fetchColumn();
     }
     
     public function readStudentQuarterGrades(int $studentID)

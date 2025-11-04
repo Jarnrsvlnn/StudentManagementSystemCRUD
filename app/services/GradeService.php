@@ -45,7 +45,7 @@ class GradeService {
     public function updateQuarterGrade(int $subjectID, int $studentID, string $quarter, float|int $grade)
     {
         $studentGradeID = $this->gradeModel->getStudentGradeID($subjectID, $studentID);
-        $this->gradeModel->updateQuarterGrade((int) $studentGradeID, $quarter, $grade);
+        $this->gradeModel->updateQuarterGrade($studentGradeID, $quarter, $grade);
     }    
 
     public function gradeRemark(int|float $grade) 
