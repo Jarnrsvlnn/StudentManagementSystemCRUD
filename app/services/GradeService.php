@@ -6,6 +6,7 @@ namespace app\Services;
 
 use app\Models\Grade;
 use app\Helpers\Format;
+use Exception;
 use PDO;
 
 class GradeService {
@@ -21,7 +22,10 @@ class GradeService {
         $remarks = $this->gradeRemark($grade);
         if (!$this->gradeModel->checkIfGraded($studentGradeID, $quarter)) {
             $this->gradeModel->createQuarterGrade($studentGradeID, $quarter, Format::formatGrade($grade));
+            return;
         }
+
+        throw new Exception("This quarter is already graded!"); 
     }
 
     public function assignStudentGrade(int $subjectID, int $studentID, float|int $finalGrade = 60.00) 
@@ -45,7 +49,15 @@ class GradeService {
     public function updateQuarterGrade(int $subjectID, int $studentID, string $quarter, float|int $grade)
     {
         $studentGradeID = $this->gradeModel->getStudentGradeID($subjectID, $studentID);
-        $this->gradeModel->updateQuarterGrade($studentGradeID, $quarter, $grade);
+        if ($this->gradeModel->checkIfGraded($studentGradeID, $quarter)) 
+        {
+            $this->gradeModel->updateQuarterGrade($studentGradeID, $quarter, $grade);
+            $this->calculateFinalGrade($studentGradeID);
+            $this->calculateAvgGrade($studentID);
+            return;
+        }
+        
+        throw new Exception("This quarter is not graded yet.");
     }    
 
     public function gradeRemark(int|float $grade) 
@@ -54,15 +66,10 @@ class GradeService {
         return 'Failed';
     }
 
-    public function getAllQuarters()
-    {
-        return $this->gradeModel->getAllQuarterGrades();
-    }
-
     public function getStudentGradeID(int $subjectID, int $studentID) 
     {
-        $studentGradeRow = $this->gradeModel->getStudentGradeID($subjectID, $studentID);
-        return $studentGradeRow['id'];
+        $studentGradeID = $this->gradeModel->getStudentGradeID($subjectID, $studentID);
+        return $studentGradeID;
     }
 
     public function calculateFinalGrade(int $studentGradeID) 

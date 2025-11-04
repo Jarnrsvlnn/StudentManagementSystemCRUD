@@ -16,11 +16,6 @@ class Grade {
     {
         $this->pdo = Application::$app->db->pdo;
     }
-
-    public function getAllQuarterGrades() 
-    {
-        $statement = $this->pdo->query("SELECT * FROM quarter_grades");
-    }
     
     public function allStudentGrades(int $studentID) 
     {
@@ -43,21 +38,24 @@ class Grade {
     public function readStudentQuarterGrades(int $studentID)
     {
         $statement = $this->pdo->prepare("SELECT 
-                                        s.full_name,
-                                        sub.subject_name,   
-                                        MAX(CASE WHEN qg.quarter = '1st' THEN qg.grade END) as q1,  
-                                        MAX(CASE WHEN qg.quarter = '2nd' THEN qg.grade END) as q2,
-                                        MAX(CASE WHEN qg.quarter = '3rd' THEN qg.grade END) as q3,
-                                        MAX(CASE WHEN qg.quarter = '4th' THEN qg.grade END) as q4,
-                                        sg.final_grade,
-                                        sg.remarks,
-                                        sg.avg_grade
-                                        FROM student_grades sg
-                                        JOIN students s ON sg.student_id = s.id
-                                        JOIN subjects sub ON sg.subject_id = sub.id
-                                        LEFT JOIN quarter_grades qg ON sg.id = qg.student_grade_id
+                                            s.full_name,
+                                            sub.subject_name,
+                                            MAX(CASE WHEN qg.quarter = '1st' THEN qg.grade END) AS q1,
+                                            MAX(CASE WHEN qg.quarter = '2nd' THEN qg.grade END) AS q2,
+                                            MAX(CASE WHEN qg.quarter = '3rd' THEN qg.grade END) AS q3,
+                                            MAX(CASE WHEN qg.quarter = '4th' THEN qg.grade END) AS q4,
+                                            sg.final_grade,
+                                            sg.remarks,
+                                            sg.avg_grade
+                                        FROM subjects sub
+                                        CROSS JOIN students s
+                                        LEFT JOIN student_grades sg 
+                                            ON sg.subject_id = sub.id AND sg.student_id = s.id
+                                        LEFT JOIN quarter_grades qg 
+                                            ON qg.student_grade_id = sg.id
                                         WHERE s.id = :student_id
                                         GROUP BY s.full_name, sub.subject_name, sg.final_grade, sg.remarks, sg.avg_grade
+                                        ORDER BY sub.subject_name
                                         ");
 
         $statement->execute([
@@ -102,7 +100,7 @@ class Grade {
         return false;
     }
 
-    public function checkIfGraded(int $studentGradeID, string $quarter): array|bool
+    public function checkIfGraded(bool|int $studentGradeID, string $quarter): array|bool
     {
         $statement = $this->pdo->prepare("SELECT * FROM quarter_grades WHERE student_grade_id = :student_grade_id AND quarter = :quarter");
         $statement->execute([
